@@ -1,0 +1,4 @@
+{% load markup %}
+{% load thumbnail %}
+<img src="{% thumbnail block.image 600x600 %}" />
+{{block.caption|markdown}}

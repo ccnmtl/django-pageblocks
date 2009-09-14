@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: pageblocks
+Version: 0.1
+Summary: Basic Pageblocks to go along with django-pagetree
+Home-page: UNKNOWN
+Author: Anders Pearson
+Author-email: anders@columbia.edu
+License: BSD
+Description: generic pageblocks
+Platform: any

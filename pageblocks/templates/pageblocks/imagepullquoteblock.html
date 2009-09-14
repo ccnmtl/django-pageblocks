@@ -1,0 +1,5 @@
+{% load markup %}
+{% load thumbnail %}
+<div class="pullquote">
+<img src="{% thumbnail block.image 100x100 %}" /><br />
+{{block.caption|markdown}}</div>
