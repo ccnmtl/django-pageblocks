@@ -38,7 +38,9 @@ setup(
     license = "BSD",
     platforms = ["any"],
     zip_safe=False,
-    package_data = {'' : ['*.*']},
+#    package_data = {'' : ['*.*']},
     packages=['pageblocks'],
     test_suite='nose.collector',
+    include_package_data=True,
+
     )

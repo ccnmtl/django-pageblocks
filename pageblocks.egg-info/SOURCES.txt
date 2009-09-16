@@ -10,6 +10,8 @@ pageblocks.egg-info/SOURCES.txt
 pageblocks.egg-info/dependency_links.txt
 pageblocks.egg-info/not-zip-safe
 pageblocks.egg-info/top_level.txt
+pageblocks/templates/__init__.py
+pageblocks/templates/pageblocks/__init__.py
 pageblocks/templates/pageblocks/htmlblock.html
 pageblocks/templates/pageblocks/imageblock.html
 pageblocks/templates/pageblocks/imagepullquoteblock.html
