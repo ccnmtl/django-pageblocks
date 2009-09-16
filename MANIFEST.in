@@ -1,1 +1,3 @@
-recursive-include templates *.html *.py
+include pageblocks/templates
+include pageblocks/templates/pageblocks
+recursive-include pageblocks/templates *.html 

@@ -1,9 +1,17 @@
+MANIFEST.in
 README.txt
 setup.py
 pageblocks/__init__.py
+pageblocks/forms.py
 pageblocks/models.py
+pageblocks/urls.py
 pageblocks.egg-info/PKG-INFO
 pageblocks.egg-info/SOURCES.txt
 pageblocks.egg-info/dependency_links.txt
 pageblocks.egg-info/not-zip-safe
 pageblocks.egg-info/top_level.txt
+pageblocks/templates/pageblocks/htmlblock.html
+pageblocks/templates/pageblocks/imageblock.html
+pageblocks/templates/pageblocks/imagepullquoteblock.html
+pageblocks/templates/pageblocks/pullquoteblock.html
+pageblocks/templates/pageblocks/textblock.html
