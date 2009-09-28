@@ -110,7 +110,6 @@ class ImageBlock(models.Model):
         try:
             os.makedirs(MEDIA_ROOT + "/" + path)
         except:
-            print "failed"
             pass
         full_filename = path + "%s.%s" % (basename,ext)
         fd = open(MEDIA_ROOT + "/" + full_filename,'wb')
@@ -118,7 +117,6 @@ class ImageBlock(models.Model):
             fd.write(chunk)
         fd.close()
         self.image = full_filename
-        print "saved %s" % full_filename
         self.save()
 
 
