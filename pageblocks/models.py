@@ -15,6 +15,9 @@ class TextBlock(models.Model):
 
     template_file = "pageblocks/textblock.html"
 
+    def __unicode__(self):
+        return unicode(self.pageblock())
+
     def pageblock(self):
         return self.pageblocks.all()[0]
 
@@ -37,6 +40,9 @@ class HTMLBlock(models.Model):
     def pageblock(self):
         return self.pageblocks.all()[0]
 
+    def __unicode__(self):
+        return unicode(self.pageblock())
+
     def edit_form(self):
         class EditForm(forms.Form):
             html = forms.CharField(initial=self.html,
@@ -55,6 +61,10 @@ class PullQuoteBlock(models.Model):
 
     def pageblock(self):
         return self.pageblocks.all()[0]
+
+
+    def __unicode__(self):
+        return unicode(self.pageblock())
 
     def edit_form(self):
         class EditForm(forms.Form):
@@ -85,6 +95,9 @@ class ImageBlock(models.Model):
 
     def pageblock(self):
         return self.pageblocks.all()[0]
+
+    def __unicode__(self):
+        return unicode(self.pageblock())
 
     def edit_form(self):
         class EditForm(forms.Form):
@@ -141,6 +154,9 @@ class ImagePullQuoteBlock(models.Model):
     def pageblock(self):
         return self.pageblocks.all()[0]
 
+    def __unicode__(self):
+        return unicode(self.pageblock())
+
     def edit_form(self):
         class EditForm(forms.Form):
             image = forms.FileField(label="replace image")
@@ -192,3 +208,6 @@ class ImagePullQuoteBlock(models.Model):
     caption = models.TextField(blank=True)
     def pageblock(self):
         return self.pageblocks.all()[0]
+
+    def __unicode__(self):
+        return unicode(self.pageblock())
