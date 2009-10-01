@@ -14,12 +14,23 @@ class TextBlock(models.Model):
     body = models.TextField(blank=True)
 
     template_file = "pageblocks/textblock.html"
+    display_name = "Text Block"
 
     def __unicode__(self):
         return unicode(self.pageblock())
 
     def pageblock(self):
         return self.pageblocks.all()[0]
+
+    @classmethod
+    def add_form(self):
+        class AddForm(forms.Form):
+            body = forms.CharField(widget=forms.widgets.Textarea())
+        return AddForm()
+
+    @classmethod
+    def create(self,request):
+        return TextBlock.objects.create(body=request.POST.get('body',''))
 
     def edit_form(self):
         class EditForm(forms.Form):
@@ -36,6 +47,7 @@ class HTMLBlock(models.Model):
     html = models.TextField(blank=True)
 
     template_file = "pageblocks/htmlblock.html"
+    display_name = "HTML Block"
 
     def pageblock(self):
         return self.pageblocks.all()[0]
@@ -49,6 +61,15 @@ class HTMLBlock(models.Model):
                                    widget=forms.widgets.Textarea())
         return EditForm()
 
+    @classmethod
+    def add_form(self):
+        class AddForm(forms.Form):
+            html = forms.CharField(widget=forms.widgets.Textarea())
+        return AddForm()
+    @classmethod
+    def create(self,request):
+        return HTMLBlock.objects.create(html=request.POST.get('html',''))
+
     def edit(self,vals,files):
         self.html = vals.get('html','')
         self.save()
@@ -58,6 +79,7 @@ class PullQuoteBlock(models.Model):
     pageblocks = generic.GenericRelation(PageBlock)
     body = models.TextField(blank=True)
     template_file = "pageblocks/pullquoteblock.html"
+    display_name = "Pull Quote"
 
     def pageblock(self):
         return self.pageblocks.all()[0]
@@ -71,6 +93,16 @@ class PullQuoteBlock(models.Model):
             body = forms.CharField(widget=forms.widgets.Textarea(),
                                    initial=self.body)
         return EditForm()
+
+    @classmethod
+    def add_form(self):
+        class AddForm(forms.Form):
+            body = forms.CharField(widget=forms.widgets.Textarea())
+        return AddForm()
+
+    @classmethod
+    def create(self,request):
+        return PullQuoteBlock.objects.create(body=request.POST.get('body',''))
 
     def edit(self,vals,files):
         self.body = vals.get('body','')
@@ -92,6 +124,7 @@ class ImageBlock(models.Model):
     caption = models.TextField(blank=True)
 
     template_file = "pageblocks/imageblock.html"
+    display_name = "Image Block"
 
     def pageblock(self):
         return self.pageblocks.all()[0]
@@ -105,6 +138,23 @@ class ImageBlock(models.Model):
             caption = forms.CharField(initial=self.caption,
                                       widget=forms.widgets.Textarea())
         return EditForm()
+
+    @classmethod
+    def add_form(self):
+        class AddForm(forms.Form):
+            image = forms.FileField(label="select image")
+            caption = forms.CharField(widget=forms.widgets.Textarea())
+        return AddForm()
+
+    @classmethod
+    def create(self,request):
+        if 'image' in request.FILES:
+            ib = ImageBlock.objects.create(caption=request.POST.get('caption',''),
+                                           image="")
+            ib.save_image(request.FILES['image'])
+            return ib
+        return None
+        
 
     def edit(self,vals,files):
         self.caption = vals.get('caption','')
@@ -150,6 +200,7 @@ class ImagePullQuoteBlock(models.Model):
     caption = models.TextField(blank=True)
 
     template_file = "pageblocks/imagepullquoteblock.html"
+    display_name = "Image Pullquote"
 
     def pageblock(self):
         return self.pageblocks.all()[0]
@@ -163,6 +214,23 @@ class ImagePullQuoteBlock(models.Model):
             caption = forms.CharField(initial=self.caption,
                                       widget=forms.widgets.Textarea())
         return EditForm()
+
+    @classmethod
+    def add_form(self):
+        class AddForm(forms.Form):
+            image = forms.FileField(label="select image")
+            caption = forms.CharField(widget=forms.widgets.Textarea())
+        return AddForm()
+
+    @classmethod
+    def create(self,request):
+        if 'image' in request.FILES:
+            ib = ImagePullQuoteBlock.objects.create(caption=request.POST.get('caption',''),
+                                                    image="")
+            ib.save_image(request.FILES['image'])
+            return ib
+        else:
+            return None
 
     def edit(self,vals,files):
         self.caption = vals.get('caption','')
@@ -192,22 +260,3 @@ class ImagePullQuoteBlock(models.Model):
 
     
 
-class ImagePullQuoteBlock(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
-    image = ImageWithThumbnailsField(upload_to="images/%Y/%m/%d",
-                                     thumbnail = {
-            'size' : (65,65)
-            },
-                                     extra_thumbnails={
-            'admin': {
-                'size': (70, 50),
-                'options': ('sharpen',),
-                }
-            }
-                                     )
-    caption = models.TextField(blank=True)
-    def pageblock(self):
-        return self.pageblocks.all()[0]
-
-    def __unicode__(self):
-        return unicode(self.pageblock())

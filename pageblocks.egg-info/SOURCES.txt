@@ -2,6 +2,7 @@ MANIFEST.in
 README.txt
 setup.py
 pageblocks/__init__.py
+pageblocks/admin.py
 pageblocks/forms.py
 pageblocks/models.py
 pageblocks/urls.py
