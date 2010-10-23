@@ -8,7 +8,6 @@ import os
 from django.template.defaultfilters import slugify
 from datetime import datetime
 
-
 class TextBlock(models.Model):
     pageblocks = generic.GenericRelation(PageBlock)
     body = models.TextField(blank=True)
@@ -258,5 +257,47 @@ class ImagePullQuoteBlock(models.Model):
         self.image = full_filename
 
 
-    
+# Using the HTMLBlockWYSIWYG
+# Install tinymce into your project: http://code.google.com/p/django-tinymce/
+# Override the admin/base-site.html: 
+## Include: <script type="text/javascript" src="/site_media/js/tiny_mce/tiny_mce.js"></script>
+## And, add the init code immediately thereafter.
+# To your settings_shared.py add 'pageblocks.HTMLBlockWYSIWYG'. 
+# Consider removing the generic HTMLBlock if you don't need it. Reduces confusion. 
+# ./manage.py syncdb
+# Define custom styles in a file called tiny_mce.css in your media/css directory
+class HTMLBlockWYSIWYG(models.Model):
+    pageblocks = generic.GenericRelation(PageBlock)
+    wysiwyg_html = models.TextField(blank=True)
 
+    template_file = "pageblocks/htmlblock_wysiwyg.html"
+    display_name = "WYSIWYG HTML Block"
+
+    def pageblock(self):
+        return self.pageblocks.all()[0]
+
+    def __unicode__(self):
+        return unicode(self.pageblock())
+    
+    @classmethod
+    def add_form(self):
+        return HTMLFormWYSIWYG()
+  
+    def edit_form(self):
+        return HTMLFormWYSIWYG(instance=self)
+    
+    @classmethod
+    def create(self,request):
+        form = HTMLFormWYSIWYG(request.POST)
+        if form.is_valid():
+            return form.save()
+
+    def edit(self,vals,files):
+        form = HTMLFormWYSIWYG(data=vals, files=files, instance=self)
+        if form.is_valid():
+            form.save()
+    
+class HTMLFormWYSIWYG(forms.ModelForm):
+    class Meta:
+        model = HTMLBlockWYSIWYG
+        widgets = { 'wysiwyg_html': forms.Textarea(attrs={'cols': 80, 'rows': 20, 'class': 'mceEditor'}), }
