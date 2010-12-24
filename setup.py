@@ -27,7 +27,7 @@ from setuptools import setup
 
 setup(
     name="pageblocks",
-    version="0.1",
+    version="0.3",
     author="Anders Pearson",
     author_email="anders@columbia.edu",
     url="",
