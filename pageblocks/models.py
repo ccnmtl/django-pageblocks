@@ -1,6 +1,6 @@
 from django.db import models
 from pagetree.models import PageBlock
-from settings import MEDIA_ROOT
+from django.conf import settings
 from sorl.thumbnail.fields import ImageWithThumbnailsField
 from django.contrib.contenttypes import generic
 from django import forms
@@ -170,11 +170,11 @@ class ImageBlock(models.Model):
         now = datetime.now()
         path = "images/%04d/%02d/%02d/" % (now.year,now.month,now.day)
         try:
-            os.makedirs(MEDIA_ROOT + "/" + path)
+            os.makedirs(settings.MEDIA_ROOT + "/" + path)
         except:
             pass
         full_filename = path + "%s.%s" % (basename,ext)
-        fd = open(MEDIA_ROOT + "/" + full_filename,'wb')
+        fd = open(settings.MEDIA_ROOT + "/" + full_filename,'wb')
         for chunk in f.chunks():
             fd.write(chunk)
         fd.close()
@@ -246,11 +246,11 @@ class ImagePullQuoteBlock(models.Model):
         now = datetime.now()
         path = "images/%04d/%02d/%02d/" % (now.year,now.month,now.day)
         try:
-            os.makedirs(MEDIA_ROOT + "/" + path)
+            os.makedirs(settings.MEDIA_ROOT + "/" + path)
         except:
             pass
         full_filename = path + "%s.%s" % (basename,ext)
-        fd = open(MEDIA_ROOT + "/" + full_filename,'wb')
+        fd = open(settings.MEDIA_ROOT + "/" + full_filename,'wb')
         for chunk in f.chunks():
             fd.write(chunk)
         fd.close()
