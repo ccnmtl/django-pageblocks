@@ -121,7 +121,8 @@ class ImageBlock(models.Model):
             }
                                      )
     caption = models.TextField(blank=True)
-
+    alt = models.CharField(max_length=100, null=True, blank=True)
+    
     template_file = "pageblocks/imageblock.html"
     display_name = "Image Block"
 
@@ -136,6 +137,7 @@ class ImageBlock(models.Model):
             image = forms.FileField(label="replace image")
             caption = forms.CharField(initial=self.caption,
                                       widget=forms.widgets.Textarea())
+            alt = forms.CharField(initial=self.alt)
         return EditForm()
 
     @classmethod
@@ -143,12 +145,14 @@ class ImageBlock(models.Model):
         class AddForm(forms.Form):
             image = forms.FileField(label="select image")
             caption = forms.CharField(widget=forms.widgets.Textarea())
+            alt = forms.CharField()
         return AddForm()
 
     @classmethod
     def create(self,request):
         if 'image' in request.FILES:
-            ib = ImageBlock.objects.create(caption=request.POST.get('caption',''),
+            ib = ImageBlock.objects.create(alt=request.POST.get('alt', ''),
+                                           caption=request.POST.get('caption',''),
                                            image="")
             ib.save_image(request.FILES['image'])
             return ib
@@ -157,6 +161,7 @@ class ImageBlock(models.Model):
 
     def edit(self,vals,files):
         self.caption = vals.get('caption','')
+        self.alt = vals.get('alt', '')
         if 'image' in files:
             self.save_image(files['image'])
         self.save()
@@ -197,6 +202,7 @@ class ImagePullQuoteBlock(models.Model):
             }
                                      )
     caption = models.TextField(blank=True)
+    alt = models.CharField(max_length=100, null=True, blank=True)
 
     template_file = "pageblocks/imagepullquoteblock.html"
     display_name = "Image Pullquote"
@@ -212,6 +218,7 @@ class ImagePullQuoteBlock(models.Model):
             image = forms.FileField(label="replace image")
             caption = forms.CharField(initial=self.caption,
                                       widget=forms.widgets.Textarea())
+            alt = forms.CharField(initial=self.alt)
         return EditForm()
 
     @classmethod
@@ -219,13 +226,15 @@ class ImagePullQuoteBlock(models.Model):
         class AddForm(forms.Form):
             image = forms.FileField(label="select image")
             caption = forms.CharField(widget=forms.widgets.Textarea())
+            alt = forms.CharField()
         return AddForm()
 
     @classmethod
     def create(self,request):
         if 'image' in request.FILES:
             ib = ImagePullQuoteBlock.objects.create(caption=request.POST.get('caption',''),
-                                                    image="")
+                                                    image="",
+                                                    alt=request.POST.get('alt', ''))
             ib.save_image(request.FILES['image'])
             return ib
         else:
@@ -233,6 +242,7 @@ class ImagePullQuoteBlock(models.Model):
 
     def edit(self,vals,files):
         self.caption = vals.get('caption','')
+        self.alt = vals.get('alt', '')
         if 'image' in files:
             self.save_image(files['image'])
         self.save()
