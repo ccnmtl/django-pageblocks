@@ -15,6 +15,8 @@ class TextBlock(models.Model):
     template_file = "pageblocks/textblock.html"
     display_name = "Text Block"
 
+    export_template = "pageblocks/export/textblock.html"
+
     def __unicode__(self):
         return unicode(self.pageblock())
 
@@ -48,6 +50,8 @@ class HTMLBlock(models.Model):
     template_file = "pageblocks/htmlblock.html"
     display_name = "HTML Block"
 
+    export_template = "pageblocks/export/htmlblock.html"
+
     def pageblock(self):
         return self.pageblocks.all()[0]
 
@@ -79,6 +83,8 @@ class PullQuoteBlock(models.Model):
     body = models.TextField(blank=True)
     template_file = "pageblocks/pullquoteblock.html"
     display_name = "Pull Quote"
+
+    export_template = "pageblocks/export/pullquoteblock.html"
 
     def pageblock(self):
         return self.pageblocks.all()[0]
@@ -125,6 +131,14 @@ class ImageBlock(models.Model):
     
     template_file = "pageblocks/imageblock.html"
     display_name = "Image Block"
+
+    export_template = "pageblocks/export/imageblock.html"
+
+    def export(self, zipfile):
+        filename = os.path.basename(self.image.file.name)
+        path = "images/%s"% filename
+        zipfile.write(self.image.file.name, path)
+        return {'image_path': path}
 
     def pageblock(self):
         return self.pageblocks.all()[0]
@@ -206,6 +220,14 @@ class ImagePullQuoteBlock(models.Model):
 
     template_file = "pageblocks/imagepullquoteblock.html"
     display_name = "Image Pullquote"
+
+    export_template = "pageblocks/export/imagepullquoteblock.html"
+
+    def export(self, zipfile):
+        filename = os.path.basename(self.image.file.name)
+        path = "images/%s"% filename
+        zipfile.write(self.image.file.name, path)
+        return {'image_path': path}
 
     def pageblock(self):
         return self.pageblocks.all()[0]
