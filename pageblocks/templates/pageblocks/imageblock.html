@@ -1,6 +1,6 @@
 {% load markup %}
 {% load thumbnail %}
-<img alt="{{block.alt}}" src="{% thumbnail block.image 600x600 %}" />
+<img alt="{{block.alt}}" src="{% if img_src %}{{img_src}}{% else %}{% thumbnail block.image 600x600 %}{% endif %}" />
 <div class="caption">
 {{block.caption|markdown}}
 </div>
