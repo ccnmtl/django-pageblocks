@@ -265,7 +265,7 @@ class ImagePullQuoteBlock(models.Model):
             fd.write(chunk)
         fd.close()
         self.image = full_filename
-
+        self.save()
 
 # Using the HTMLBlockWYSIWYG
 # Install tinymce into your project: http://code.google.com/p/django-tinymce/
