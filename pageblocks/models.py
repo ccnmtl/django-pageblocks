@@ -8,6 +8,7 @@ import os
 from django.template.defaultfilters import slugify
 from datetime import datetime
 
+
 class TextBlock(models.Model):
     pageblocks = generic.GenericRelation(PageBlock)
     body = models.TextField(blank=True)
