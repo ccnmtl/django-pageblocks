@@ -1,2 +1,2 @@
-recursive-include pageblocks/templates *
+recursive-include pageblocks *
 
