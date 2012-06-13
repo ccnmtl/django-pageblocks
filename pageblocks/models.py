@@ -42,6 +42,9 @@ class TextBlock(models.Model):
         self.body = vals.get('body','')
         self.save()
 
+    def as_dict(self):
+        return dict(body=self.body)
+
 class HTMLBlock(models.Model):
     pageblocks = generic.GenericRelation(PageBlock)
     html = models.TextField(blank=True)
@@ -73,6 +76,9 @@ class HTMLBlock(models.Model):
     def edit(self,vals,files):
         self.html = vals.get('html','')
         self.save()
+
+    def as_dict(self):
+        return dict(html=self.html)
 
 
 class PullQuoteBlock(models.Model):
@@ -107,6 +113,10 @@ class PullQuoteBlock(models.Model):
     def edit(self,vals,files):
         self.body = vals.get('body','')
         self.save()
+
+    def as_dict(self):
+        return dict(body=self.body)
+
 
 class ImageBlock(models.Model):
     pageblocks = generic.GenericRelation(PageBlock)
@@ -186,6 +196,11 @@ class ImageBlock(models.Model):
         fd.close()
         self.image = full_filename
         self.save()
+
+    def as_dict(self):
+        return dict(image=self.image,
+                    alt=self.alt,
+                    caption=self.caption)
 
 
 
@@ -268,6 +283,12 @@ class ImagePullQuoteBlock(models.Model):
         self.image = full_filename
         self.save()
 
+    def as_dict(self):
+        return dict(image=self.image,
+                    alt=self.alt,
+                    caption=self.caption)
+
+
 # Using the HTMLBlockWYSIWYG
 # Install tinymce into your project: http://code.google.com/p/django-tinymce/
 # Override the admin/base-site.html: 
@@ -307,6 +328,10 @@ class HTMLBlockWYSIWYG(models.Model):
         form = HTMLFormWYSIWYG(data=vals, files=files, instance=self)
         if form.is_valid():
             form.save()
+
+    def as_dict(self):
+        return dict(wysiwyg_html=self.wysiwyg_html)
+
     
 class HTMLFormWYSIWYG(forms.ModelForm):
     class Meta:
