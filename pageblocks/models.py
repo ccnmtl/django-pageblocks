@@ -32,6 +32,10 @@ class TextBlock(models.Model):
     def create(self, request):
         return TextBlock.objects.create(body=request.POST.get('body', ''))
 
+    @classmethod
+    def create_from_dict(self, d):
+        return TextBlock.objects.create(body=d.get('body', ''))
+
     def edit_form(self):
         class EditForm(forms.Form):
             body = forms.CharField(widget=forms.widgets.Textarea(),
@@ -75,6 +79,10 @@ class HTMLBlock(models.Model):
     def create(self, request):
         return HTMLBlock.objects.create(html=request.POST.get('html', ''))
 
+    @classmethod
+    def create_from_dict(self, d):
+        return HTMLBlock.objects.create(html=d.get('html', ''))
+
     def edit(self, vals, files):
         self.html = vals.get('html', '')
         self.save()
@@ -110,6 +118,10 @@ class PullQuoteBlock(models.Model):
     @classmethod
     def create(self, request):
         return PullQuoteBlock.objects.create(body=request.POST.get('body', ''))
+
+    @classmethod
+    def create_from_dict(self, d):
+        return PullQuoteBlock.objects.create(body=d.get('body', ''))
 
     def edit(self, vals, files):
         self.body = vals.get('body', '')
@@ -169,6 +181,16 @@ class ImageBlock(models.Model):
             ib.save_image(request.FILES['image'])
             return ib
         return None
+
+    @classmethod
+    def create_from_dict(self, d):
+        # since it's coming from a dict, not a request
+        # we assume that some other part is handling the writing of
+        # the image file to disk and we just get a path to it
+        return ImageBlock.objects.create(
+            image=d.get('image', ''),
+            alt=d.get('alt', ''),
+            caption=d.get('caption', ''))
 
     def edit(self, vals, files):
         self.caption = vals.get('caption', '')
@@ -256,6 +278,16 @@ class ImagePullQuoteBlock(models.Model):
         else:
             return None
 
+    @classmethod
+    def create_from_dict(self, d):
+        # since it's coming from a dict, not a request
+        # we assume that some other part is handling the writing of
+        # the image file to disk and we just get a path to it
+        return ImagePullQuoteBlock.objects.create(
+            image=d.get('image', ''),
+            alt=d.get('alt', ''),
+            caption=d.get('caption', ''))
+
     def edit(self, vals, files):
         self.caption = vals.get('caption', '')
         self.alt = vals.get('alt', '')
@@ -326,6 +358,10 @@ class HTMLBlockWYSIWYG(models.Model):
         form = HTMLFormWYSIWYG(request.POST)
         if form.is_valid():
             return form.save()
+
+    @classmethod
+    def create_from_dict(self, d):
+        return HTMLBlockWYSIWYG.objects.create(html=d.get('html', ''))
 
     def edit(self, vals, files):
         form = HTMLFormWYSIWYG(data=vals, files=files, instance=self)
