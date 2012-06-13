@@ -1,14 +1,11 @@
-import codecs
+import os
 from django.core.files import File
-import lxml.etree as etree
-from models import *
-from pagetree.models import *
-import tempfile
-from zipfile import ZipFile
+from models import TextBlock, HTMLBlock, PullQuoteBlock, ImageBlock
+from models import ImagePullQuoteBlock
+#from pagetree.models import *
 
-from pagetree_export import (register_class as register,
-                             get_exporter, get_importer)
-from pagetree_export.utils import asbool, sanitize, get_all_pageblocks
+from pagetree_export import register_class as register
+
 
 @register
 class Text(object):
@@ -29,6 +26,7 @@ class Text(object):
         b.save()
         return b
 
+
 @register
 class HTML(object):
     block_class = HTMLBlock
@@ -48,6 +46,7 @@ class HTML(object):
         b.save()
         return b
 
+
 @register
 class PullQuote(Text):
     block_class = PullQuoteBlock
@@ -57,10 +56,11 @@ class PullQuote(Text):
         children = node.getchildren()
         assert len(children) == 1 and children[0].tag == "text"
         path = children[0].get("src")
-        body = zipfile.read(path)    
+        body = zipfile.read(path)
         b = PullQuoteBlock(body=body)
         b.save()
         return b
+
 
 @register
 class Image(object):
@@ -87,6 +87,7 @@ class Image(object):
         b.save()
         return b
 
+
 @register
 class ImagePullQuote(Image):
     block_class = ImagePullQuoteBlock
@@ -106,6 +107,7 @@ class ImagePullQuote(Image):
 
 # statichtml exporters
 
+
 @register
 class Image(object):
     block_class = ImageBlock
@@ -117,6 +119,7 @@ class Image(object):
         filename = "pageblocks/%s-%s" % (block.pk, filename)
         zipfile.write(block.image.file.name, arcname=filename)
         return {'img_src': '/' + filename.strip('/')}
+
 
 @register
 class ImagePullQuote(Image):
