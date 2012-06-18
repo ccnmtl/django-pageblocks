@@ -25,7 +25,7 @@ class TextBlock(models.Model):
     @classmethod
     def add_form(self):
         class AddForm(forms.Form):
-            body = forms.CharField(widget=forms.widgets.Textarea())
+            body = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols': 80}))
         return AddForm()
 
     @classmethod
