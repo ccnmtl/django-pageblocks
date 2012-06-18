@@ -220,9 +220,12 @@ class ImageBlock(models.Model):
         self.save()
 
     def as_dict(self):
-        return dict(image=self.image,
+        return dict(image=self.image.name,
                     alt=self.alt,
                     caption=self.caption)
+
+    def list_resources(self):
+        return [self.image.url]
 
 
 class ImagePullQuoteBlock(models.Model):
@@ -316,9 +319,12 @@ class ImagePullQuoteBlock(models.Model):
         self.save()
 
     def as_dict(self):
-        return dict(image=self.image,
+        return dict(image=self.image.name,
                     alt=self.alt,
                     caption=self.caption)
+
+    def list_resources(self):
+        return [self.image.url]
 
 
 # Using the HTMLBlockWYSIWYG
