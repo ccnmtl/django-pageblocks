@@ -27,7 +27,7 @@ from setuptools import setup
 
 setup(
     name="django-pageblocks",
-    version="0.5.5",
+    version="0.5.6",
     author="Anders Pearson",
     author_email="anders@columbia.edu",
     url="",
