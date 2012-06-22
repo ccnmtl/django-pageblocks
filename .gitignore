@@ -1,2 +1,5 @@
 dist
 *.pyc
+django_pageblocks.egg-info
+build
+pageblocks.egg-info
