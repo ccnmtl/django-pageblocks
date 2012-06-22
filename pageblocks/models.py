@@ -7,6 +7,10 @@ from django import forms
 import os
 from django.template.defaultfilters import slugify
 from datetime import datetime
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules(
+    [],
+    ["^sorl\.thumbnail\.fields\.ImageWithThumbnailsField$"])
 
 
 class TextBlock(models.Model):
@@ -25,7 +29,8 @@ class TextBlock(models.Model):
     @classmethod
     def add_form(self):
         class AddForm(forms.Form):
-            body = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols': 80}))
+            body = forms.CharField(
+                widget=forms.widgets.Textarea(attrs={'cols': 80}))
         return AddForm()
 
     @classmethod
@@ -146,6 +151,7 @@ class ImageBlock(models.Model):
             })
     caption = models.TextField(blank=True)
     alt = models.CharField(max_length=100, null=True, blank=True)
+    lightbox = models.BooleanField(default=False)
     template_file = "pageblocks/imageblock.html"
     display_name = "Image Block"
 
@@ -161,6 +167,7 @@ class ImageBlock(models.Model):
             caption = forms.CharField(initial=self.caption,
                                       widget=forms.widgets.Textarea())
             alt = forms.CharField(initial=self.alt)
+            lightbox = forms.BooleanField(initial=self.lightbox)
         return EditForm()
 
     @classmethod
@@ -169,6 +176,7 @@ class ImageBlock(models.Model):
             image = forms.FileField(label="select image")
             caption = forms.CharField(widget=forms.widgets.Textarea())
             alt = forms.CharField()
+            lightbox = forms.BooleanField()
         return AddForm()
 
     @classmethod
@@ -177,6 +185,7 @@ class ImageBlock(models.Model):
             ib = ImageBlock.objects.create(
                 alt=request.POST.get('alt', ''),
                 caption=request.POST.get('caption', ''),
+                lightbox=request.POST.get('lightbox', False),
                 image="")
             ib.save_image(request.FILES['image'])
             return ib
@@ -190,11 +199,13 @@ class ImageBlock(models.Model):
         return ImageBlock.objects.create(
             image=d.get('image', ''),
             alt=d.get('alt', ''),
+            lightbox=d.get('lightbox', False),
             caption=d.get('caption', ''))
 
     def edit(self, vals, files):
         self.caption = vals.get('caption', '')
         self.alt = vals.get('alt', '')
+        self.lightbox = vals.get('lightbox', False)
         if 'image' in files:
             self.save_image(files['image'])
         self.save()
@@ -222,6 +233,7 @@ class ImageBlock(models.Model):
     def as_dict(self):
         return dict(image=self.image.name,
                     alt=self.alt,
+                    lighbox=self.lightbox,
                     caption=self.caption)
 
     def list_resources(self):
