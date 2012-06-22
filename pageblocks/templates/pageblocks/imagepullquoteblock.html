@@ -1,8 +1,12 @@
 {% load markup %}
 {% load thumbnail %}
-<div class="pullquote">
-<img alt="{{block.alt}}" src="{% if img_src %}{{img_src}}{% else %}{% thumbnail block.image 100x100 %}{% endif %}" /><br />
+<ul class="thumbnails">
+<li class="span6">
+<div class="thumbnail">
+<img alt="{{block.alt}}" src="{% if img_src %}{{img_src}}{% else %}{% thumbnail block.image 260x180 %}{% endif %}" /><br />
 <div class="caption">
 {{block.caption|markdown}}
 </div>
 </div>
+</li>
+</ul>
