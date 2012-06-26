@@ -103,9 +103,9 @@ class HTMLBlock(models.Model):
 
     def summary_render(self):
         if len(self.body) < 61:
-            return self.html.replace("<","&lt;")
+            return self.html.replace("<", "&lt;")
         else:
-            return self.html[:61].replace("<","&lt;") + "..."
+            return self.html[:61].replace("<", "&lt;") + "..."
 
 
 class PullQuoteBlock(models.Model):
