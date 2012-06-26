@@ -54,6 +54,12 @@ class TextBlock(models.Model):
     def as_dict(self):
         return dict(body=self.body)
 
+    def summary_render(self):
+        if len(self.body) < 61:
+            return self.body
+        else:
+            return self.body[:61] + "..."
+
 
 class HTMLBlock(models.Model):
     pageblocks = generic.GenericRelation(PageBlock)
@@ -95,6 +101,12 @@ class HTMLBlock(models.Model):
     def as_dict(self):
         return dict(html=self.html)
 
+    def summary_render(self):
+        if len(self.body) < 61:
+            return self.html.replace("<","&lt;")
+        else:
+            return self.html[:61].replace("<","&lt;") + "..."
+
 
 class PullQuoteBlock(models.Model):
     pageblocks = generic.GenericRelation(PageBlock)
@@ -135,6 +147,12 @@ class PullQuoteBlock(models.Model):
     def as_dict(self):
         return dict(body=self.body)
 
+    def summary_render(self):
+        if len(self.body) < 61:
+            return self.body
+        else:
+            return self.body[:61] + "..."
+
 
 class ImageBlock(models.Model):
     pageblocks = generic.GenericRelation(PageBlock)
@@ -154,6 +172,7 @@ class ImageBlock(models.Model):
     lightbox = models.BooleanField(default=False)
     template_file = "pageblocks/imageblock.html"
     display_name = "Image Block"
+    summary_template_file = "pageblocks/imageblock_summary.html"
 
     def pageblock(self):
         return self.pageblocks.all()[0]
@@ -257,6 +276,7 @@ class ImagePullQuoteBlock(models.Model):
     alt = models.CharField(max_length=100, null=True, blank=True)
 
     template_file = "pageblocks/imagepullquoteblock.html"
+    summary_template_file = "pageblocks/imagepullquoteblock_summary.html"
     display_name = "Image Pullquote"
 
     def pageblock(self):
