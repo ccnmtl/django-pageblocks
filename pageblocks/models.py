@@ -102,7 +102,7 @@ class HTMLBlock(models.Model):
         return dict(html=self.html)
 
     def summary_render(self):
-        if len(self.body) < 61:
+        if len(self.html) < 61:
             return self.html.replace("<", "&lt;")
         else:
             return self.html[:61].replace("<", "&lt;") + "..."
