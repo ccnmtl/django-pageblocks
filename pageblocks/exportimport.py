@@ -119,9 +119,3 @@ class Image(object):
         filename = "pageblocks/%s-%s" % (block.pk, filename)
         zipfile.write(block.image.file.name, arcname=filename)
         return {'img_src': '/' + filename.strip('/')}
-
-
-@register
-class ImagePullQuote(Image):
-    block_class = ImagePullQuoteBlock
-    identifier = 'imagepullquote'

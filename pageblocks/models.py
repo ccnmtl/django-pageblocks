@@ -160,13 +160,13 @@ class ImageBlock(models.Model):
         upload_to="images/%Y/%m/%d",
         thumbnail={
             'size': (65, 65)
-            },
+        },
         extra_thumbnails={
             'admin': {
                 'size': (70, 50),
                 'options': ('sharpen',),
-                }
-            })
+            }
+        })
     caption = models.TextField(blank=True)
     alt = models.CharField(max_length=100, null=True, blank=True)
     lightbox = models.BooleanField(default=False)
@@ -265,13 +265,13 @@ class ImagePullQuoteBlock(models.Model):
         upload_to="images/%Y/%m/%d",
         thumbnail={
             'size': (65, 65)
-            },
+        },
         extra_thumbnails={
             'admin': {
                 'size': (70, 50),
                 'options': ('sharpen', ),
-                }
-            })
+            }
+        })
     caption = models.TextField(blank=True)
     alt = models.CharField(max_length=100, null=True, blank=True)
 
@@ -413,6 +413,7 @@ class HTMLBlockWYSIWYG(models.Model):
 class HTMLFormWYSIWYG(forms.ModelForm):
     class Meta:
         model = HTMLBlockWYSIWYG
-        widgets = {'wysiwyg_html': forms.Textarea(
+        widgets = {
+            'wysiwyg_html': forms.Textarea(
                 attrs={'cols': 80, 'rows': 20, 'class': 'mceEditor'}),
-                   }
+        }
