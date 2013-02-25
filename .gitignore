@@ -3,3 +3,7 @@ dist
 django_pageblocks.egg-info
 build
 pageblocks.egg-info
+._*
+*~
+*.pyc
+ve
