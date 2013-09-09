@@ -252,7 +252,7 @@ class ImageBlock(models.Model):
     def as_dict(self):
         return dict(image=self.image.name,
                     alt=self.alt,
-                    lighbox=self.lightbox,
+                    lightbox=self.lightbox,
                     caption=self.caption)
 
     def list_resources(self):

@@ -134,9 +134,7 @@ class ImageBlockTest(TestCase):
         self.assertEqual(
             tb.as_dict(),
             dict(image='foo/bar/blah.jpg',
-                 alt='', caption='',
-                 # A BUG! to be fixed in the next release
-                 lighbox=False))
+                 alt='', caption='', lightbox=False))
 
     def test_list_resources(self):
         tb = ImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
