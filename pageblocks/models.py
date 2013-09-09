@@ -399,7 +399,8 @@ class HTMLBlockWYSIWYG(models.Model):
 
     @classmethod
     def create_from_dict(self, d):
-        return HTMLBlockWYSIWYG.objects.create(html=d.get('html', ''))
+        return HTMLBlockWYSIWYG.objects.create(
+            wysiwyg_html=d.get('wysiwyg_html', ''))
 
     def edit(self, vals, files):
         form = HTMLFormWYSIWYG(data=vals, files=files, instance=self)

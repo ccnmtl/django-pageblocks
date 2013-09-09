@@ -185,11 +185,10 @@ class HTMLBlockWYSIWYGTest (TestCase):
         f = HTMLBlockWYSIWYG.add_form()
         self.assertTrue('wysiwyg_html' in f.fields)
 
-# FAILING due to bug to be fixed in next release
-#    def test_create_from_dict(self):
-#        d = dict(wysiwyg_html='foo')
-#        tb = HTMLBlockWYSIWYG.create_from_dict(d)
-#        self.assertEqual(tb.wysiwyg_html, 'foo')
+    def test_create_from_dict(self):
+        d = dict(wysiwyg_html='foo')
+        tb = HTMLBlockWYSIWYG.create_from_dict(d)
+        self.assertEqual(tb.wysiwyg_html, 'foo')
 
     def test_edit_form(self):
         tb = HTMLBlockWYSIWYG.objects.create(wysiwyg_html='foo')
