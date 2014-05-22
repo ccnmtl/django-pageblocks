@@ -2,24 +2,32 @@
 {% load thumbnail %}
 
 {% if block.lightbox %}
-<div class="modal hide" id="image-lightbox-{{block.id}}">
-  <div class="modal-header">
-    <button type="button" class="close"
-    data-dismiss="modal">×</button>
-		<h3>{{block.alt}}</h3>
-  </div>
-  <div class="modal-body">
-		<img alt="{{block.alt}}" src="{% if img_src %}{{img_src}}{% else %}{% thumbnail block.image 500x500 %}{% endif %}" />
-		<div class="caption">
-			{{block.caption|markdown}}
+<style type="text/css">
+.bigModal .modal-dialog {
+   width:960px;
+}
+</style>
+<div class="modal bigModal" id="image-lightbox-{{block.id}}">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title">{{block.alt}}</h3>
+			</div>
+			<div class="modal-body">
+				<img alt="{{block.alt}}" src="{% if img_src %}{{img_src}}{% else %}{% thumbnail block.image 900x900 %}{% endif %}" />
+				<div class="caption">
+					{{block.caption|markdown}}
+				</div>
+			</div>
 		</div>
-  </div>
+	</div>
 </div>
 
 <ul class="thumbnails">
 	<li class="span3">
 		<div class="thumbnail">
-			<a data-toggle="modal" href="#image-lightbox-{{block.id}}">
+			<a data-toggle="modal" href="#image-lightbox-{{block.id}}" data-target="#image-lightbox-{{block.id}}">
 				<img alt="{{block.alt}}" 
 						 src="{% if img_src %}{{img_src}}{% else %}{% thumbnail block.image 500x500 %}{% endif %}" />
 			</a>
