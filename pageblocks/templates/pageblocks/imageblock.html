@@ -29,7 +29,7 @@
 		<div class="thumbnail">
 			<a data-toggle="modal" href="#image-lightbox-{{block.id}}" data-target="#image-lightbox-{{block.id}}">
 				<img alt="{{block.alt}}" 
-						 src="{% if img_src %}{{img_src}}{% else %}{% thumbnail block.image 500x500 %}{% endif %}" />
+						 src="{% if img_src %}{{img_src}}{% else %}{% thumbnail block.image 200x200 %}{% endif %}" />
 			</a>
 			<div class="caption">
 				{{block.caption|markdown}}
