@@ -27,7 +27,7 @@ from setuptools import setup
 
 setup(
     name="django-pageblocks",
-    version="0.5.13",
+    version="1.0.0",
     author="Anders Pearson",
     author_email="anders@columbia.edu",
     url="",
@@ -38,7 +38,6 @@ setup(
     license = "BSD",
     platforms = ["any"],
     zip_safe=False,
-#    package_data = {'' : ['*.*']},
     packages=['pageblocks'],
     test_suite='nose.collector',
     include_package_data=True,
