@@ -7,10 +7,6 @@ from django import forms
 import os
 from django.template.defaultfilters import slugify
 from datetime import datetime
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules(
-    [],
-    ["^sorl\.thumbnail\.fields\.ImageWithThumbnailsField$"])
 
 
 class TextBlock(models.Model):
