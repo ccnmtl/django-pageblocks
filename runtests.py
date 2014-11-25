@@ -6,6 +6,7 @@ $ ./ve/bin/python runtests.py
 """
 
 
+import django
 from django.conf import settings
 from django.core.management import call_command
 
@@ -21,7 +22,6 @@ def main():
             'pagetree',
             'pageblocks',
             'django_nose',
-            'django.contrib.markup',
             'django_jenkins',
         ),
         TEST_RUNNER = 'django_nose.NoseTestSuiteRunner',
@@ -32,7 +32,6 @@ def main():
         ],
         JENKINS_TASKS = (
             'django_jenkins.tasks.with_coverage',
-            'django_jenkins.tasks.django_tests',
         ),
         PROJECT_APPS = [
             'pageblocks',
@@ -54,6 +53,12 @@ def main():
                 }
             }
     )
+
+    try:
+        # required by Django 1.7 and later
+        django.setup()
+    except AttributeError:
+        pass
 
     # Fire off the tests
     call_command('jenkins')
