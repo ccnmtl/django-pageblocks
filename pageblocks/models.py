@@ -32,19 +32,19 @@ class TextBlock(models.Model):
         return self.pageblocks.all()[0]
 
     @classmethod
-    def add_form(self):
+    def add_form(cls):
         class AddForm(forms.Form):
             body = forms.CharField(
                 widget=forms.widgets.Textarea(attrs={'cols': 80}))
         return AddForm()
 
     @classmethod
-    def create(self, request):
-        return TextBlock.objects.create(body=request.POST.get('body', ''))
+    def create(cls, request):
+        return cls.objects.create(body=request.POST.get('body', ''))
 
     @classmethod
-    def create_from_dict(self, d):
-        return TextBlock.objects.create(body=d.get('body', ''))
+    def create_from_dict(cls, d):
+        return cls.objects.create(body=d.get('body', ''))
 
     def edit_form(self):
         class EditForm(forms.Form):
@@ -86,18 +86,18 @@ class HTMLBlock(models.Model):
         return EditForm()
 
     @classmethod
-    def add_form(self):
+    def add_form(cls):
         class AddForm(forms.Form):
             html = forms.CharField(widget=forms.widgets.Textarea())
         return AddForm()
 
     @classmethod
-    def create(self, request):
-        return HTMLBlock.objects.create(html=request.POST.get('html', ''))
+    def create(cls, request):
+        return cls.objects.create(html=request.POST.get('html', ''))
 
     @classmethod
-    def create_from_dict(self, d):
-        return HTMLBlock.objects.create(html=d.get('html', ''))
+    def create_from_dict(cls, d):
+        return cls.objects.create(html=d.get('html', ''))
 
     def edit(self, vals, files):
         self.html = vals.get('html', '')
@@ -132,18 +132,18 @@ class PullQuoteBlock(models.Model):
         return EditForm()
 
     @classmethod
-    def add_form(self):
+    def add_form(cls):
         class AddForm(forms.Form):
             body = forms.CharField(widget=forms.widgets.Textarea())
         return AddForm()
 
     @classmethod
-    def create(self, request):
-        return PullQuoteBlock.objects.create(body=request.POST.get('body', ''))
+    def create(cls, request):
+        return cls.objects.create(body=request.POST.get('body', ''))
 
     @classmethod
-    def create_from_dict(self, d):
-        return PullQuoteBlock.objects.create(body=d.get('body', ''))
+    def create_from_dict(cls, d):
+        return cls.objects.create(body=d.get('body', ''))
 
     def edit(self, vals, files):
         self.body = vals.get('body', '')
@@ -195,7 +195,7 @@ class ImageBlock(models.Model):
         return EditForm()
 
     @classmethod
-    def add_form(self):
+    def add_form(cls):
         class AddForm(forms.Form):
             image = forms.FileField(label="select image")
             caption = forms.CharField(widget=forms.widgets.Textarea())
@@ -204,9 +204,9 @@ class ImageBlock(models.Model):
         return AddForm()
 
     @classmethod
-    def create(self, request):
+    def create(cls, request):
         if 'image' in request.FILES:
-            ib = ImageBlock.objects.create(
+            ib = cls.objects.create(
                 alt=request.POST.get('alt', ''),
                 caption=request.POST.get('caption', ''),
                 lightbox=request.POST.get('lightbox', False),
@@ -216,11 +216,11 @@ class ImageBlock(models.Model):
         return None
 
     @classmethod
-    def create_from_dict(self, d):
+    def create_from_dict(cls, d):
         # since it's coming from a dict, not a request
         # we assume that some other part is handling the writing of
         # the image file to disk and we just get a path to it
-        return ImageBlock.objects.create(
+        return cls.objects.create(
             image=d.get('image', ''),
             alt=d.get('alt', ''),
             lightbox=d.get('lightbox', False),
@@ -299,7 +299,7 @@ class ImagePullQuoteBlock(models.Model):
         return EditForm()
 
     @classmethod
-    def add_form(self):
+    def add_form(cls):
         class AddForm(forms.Form):
             image = forms.FileField(label="select image")
             caption = forms.CharField(widget=forms.widgets.Textarea())
@@ -307,9 +307,9 @@ class ImagePullQuoteBlock(models.Model):
         return AddForm()
 
     @classmethod
-    def create(self, request):
+    def create(cls, request):
         if 'image' in request.FILES:
-            ib = ImagePullQuoteBlock.objects.create(
+            ib = cls.objects.create(
                 caption=request.POST.get('caption', ''),
                 image="",
                 alt=request.POST.get('alt', ''))
@@ -319,11 +319,11 @@ class ImagePullQuoteBlock(models.Model):
             return None
 
     @classmethod
-    def create_from_dict(self, d):
+    def create_from_dict(cls, d):
         # since it's coming from a dict, not a request
         # we assume that some other part is handling the writing of
         # the image file to disk and we just get a path to it
-        return ImagePullQuoteBlock.objects.create(
+        return cls.objects.create(
             image=d.get('image', ''),
             alt=d.get('alt', ''),
             caption=d.get('caption', ''))
@@ -390,21 +390,21 @@ class HTMLBlockWYSIWYG(models.Model):
         return unicode(self.pageblock())
 
     @classmethod
-    def add_form(self):
+    def add_form(cls):
         return HTMLFormWYSIWYG()
 
     def edit_form(self):
         return HTMLFormWYSIWYG(instance=self)
 
     @classmethod
-    def create(self, request):
+    def create(cls, request):
         form = HTMLFormWYSIWYG(request.POST)
         if form.is_valid():
             return form.save()
 
     @classmethod
-    def create_from_dict(self, d):
-        return HTMLBlockWYSIWYG.objects.create(
+    def create_from_dict(cls, d):
+        return cls.objects.create(
             wysiwyg_html=d.get('wysiwyg_html', ''))
 
     def edit(self, vals, files):
