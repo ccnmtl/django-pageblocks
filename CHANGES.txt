@@ -1,0 +1,4 @@
+1.0.1
+===========
+* Pageblocks' ImageBlock and ImagePullQuoteBlock now use sorl-thumbnail
+  instead of sorl-3.1, which is no longer available on pypi.

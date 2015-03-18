@@ -11,4 +11,4 @@ django-jenkins==0.16.3
 pep8==1.5.7
 pyflakes==0.8.1
 Pillow==2.7.0
-test_reqs/sorl-3.1.tar.gz
+sorl-thumbnail==12.2

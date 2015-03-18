@@ -1,21 +1,12 @@
 from django.db import models
 from pagetree.models import PageBlock
 from django.conf import settings
-from sorl.thumbnail.fields import ImageWithThumbnailsField
+from sorl.thumbnail.fields import ImageField
 from django.contrib.contenttypes import generic
 from django import forms
 import os
 from django.template.defaultfilters import slugify
 from datetime import datetime
-
-try:
-    from south.modelsinspector import add_introspection_rules
-    add_introspection_rules(
-        [],
-        ["^sorl\.thumbnail\.fields\.ImageWithThumbnailsField$"])
-except ImportError:
-    # no south if we're on django 1.7+
-    pass
 
 
 class TextBlock(models.Model):
@@ -161,17 +152,7 @@ class PullQuoteBlock(models.Model):
 
 class ImageBlock(models.Model):
     pageblocks = generic.GenericRelation(PageBlock)
-    image = ImageWithThumbnailsField(
-        upload_to="images/%Y/%m/%d",
-        thumbnail={
-            'size': (65, 65)
-        },
-        extra_thumbnails={
-            'admin': {
-                'size': (70, 50),
-                'options': ('sharpen',),
-            }
-        })
+    image = ImageField(upload_to="images/%Y/%m/%d")
     caption = models.TextField(blank=True)
     alt = models.CharField(max_length=100, null=True, blank=True)
     lightbox = models.BooleanField(default=False)
@@ -266,17 +247,7 @@ class ImageBlock(models.Model):
 
 class ImagePullQuoteBlock(models.Model):
     pageblocks = generic.GenericRelation(PageBlock)
-    image = ImageWithThumbnailsField(
-        upload_to="images/%Y/%m/%d",
-        thumbnail={
-            'size': (65, 65)
-        },
-        extra_thumbnails={
-            'admin': {
-                'size': (70, 50),
-                'options': ('sharpen', ),
-            }
-        })
+    image = ImageField(upload_to="images/%Y/%m/%d")
     caption = models.TextField(blank=True)
     alt = models.CharField(max_length=100, null=True, blank=True)
 
