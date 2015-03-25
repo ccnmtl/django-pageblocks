@@ -8,3 +8,6 @@ pageblocks.egg-info
 *.pyc
 ve
 reports/
+.project
+.pydevproject
+.settings/

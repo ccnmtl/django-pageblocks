@@ -247,7 +247,9 @@ class ImageBlock(models.Model):
         except:
             pass
         full_filename = path + "%s.%s" % (basename, ext)
-        fd = open(settings.MEDIA_ROOT + "/" + full_filename, 'wb')
+        fd = self.image.storage.open(
+            settings.MEDIA_ROOT + "/" + full_filename, 'wb')
+        
         for chunk in f.chunks():
             fd.write(chunk)
         fd.close()
