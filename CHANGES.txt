@@ -1,0 +1,10 @@
+1.0.1 (2015-03-25)
+==================
+* ImageBlock - support saving to S3
+* Use generic constructors (2015-02-09)
+* Update test dependencies (2015-02-10)
+* Require sorl (2015-03-18)
+
+1.0.0 (2014-09-09)
+==================
+* support Django 1.7 migrations
