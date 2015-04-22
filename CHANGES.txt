@@ -1,3 +1,7 @@
+1.0.2 (2015-04-22)
+==================
+* Now compatible with Django 1.8
+
 1.0.1 (2015-03-25)
 ==================
 * ImageBlock - support saving to S3

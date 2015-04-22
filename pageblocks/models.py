@@ -421,6 +421,7 @@ class HTMLBlockWYSIWYG(models.Model):
 class HTMLFormWYSIWYG(forms.ModelForm):
     class Meta:
         model = HTMLBlockWYSIWYG
+        fields = '__all__'
         widgets = {
             'wysiwyg_html': forms.Textarea(
                 attrs={'cols': 80, 'rows': 20, 'class': 'mceEditor'}),
