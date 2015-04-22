@@ -1,6 +1,7 @@
 """ run tests for pagetree
 
 $ virtualenv ve
+$ ./ve/bin/pip install Django==1.8
 $ ./ve/bin/pip install -r test_reqs.txt
 $ ./ve/bin/python runtests.py
 """
@@ -21,15 +22,10 @@ def main():
             'django.contrib.sessions',
             'pagetree',
             'pageblocks',
-            'django_nose',
             'django_jenkins',
         ),
-        TEST_RUNNER = 'django_nose.NoseTestSuiteRunner',
+        TEST_RUNNER = 'django.test.runner.DiscoverRunner',
 
-        NOSE_ARGS = [
-            '--with-coverage',
-            '--cover-package=pageblocks',
-        ],
         JENKINS_TASKS = (
             'django_jenkins.tasks.with_coverage',
         ),
