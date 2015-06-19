@@ -30,7 +30,7 @@ class TextBlock(models.Model):
         return unicode(self.pageblock())
 
     def pageblock(self):
-        return self.pageblocks.all()[0]
+        return self.pageblocks.first()
 
     @classmethod
     def add_form(cls):
@@ -75,7 +75,7 @@ class HTMLBlock(models.Model):
     display_name = "HTML Block"
 
     def pageblock(self):
-        return self.pageblocks.all()[0]
+        return self.pageblocks.first()
 
     def __unicode__(self):
         return unicode(self.pageblock())
@@ -121,7 +121,7 @@ class PullQuoteBlock(models.Model):
     display_name = "Pull Quote"
 
     def pageblock(self):
-        return self.pageblocks.all()[0]
+        return self.pageblocks.first()
 
     def __unicode__(self):
         return unicode(self.pageblock())
@@ -181,7 +181,7 @@ class ImageBlock(models.Model):
     summary_template_file = "pageblocks/imageblock_summary.html"
 
     def pageblock(self):
-        return self.pageblocks.all()[0]
+        return self.pageblocks.first()
 
     def __unicode__(self):
         return unicode(self.pageblock())
@@ -362,7 +362,7 @@ class ImagePullQuoteBlock(models.Model):
     display_name = "Image Pullquote"
 
     def pageblock(self):
-        return self.pageblocks.all()[0]
+        return self.pageblocks.first()
 
     def __unicode__(self):
         return unicode(self.pageblock())
@@ -461,7 +461,7 @@ class HTMLBlockWYSIWYG(models.Model):
     display_name = "WYSIWYG HTML Block"
 
     def pageblock(self):
-        return self.pageblocks.all()[0]
+        return self.pageblocks.first()
 
     def __unicode__(self):
         return unicode(self.pageblock())

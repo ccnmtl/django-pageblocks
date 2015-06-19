@@ -3,9 +3,18 @@ from pageblocks.models import (
     TextBlock, HTMLBlock, PullQuoteBlock, ImageBlock,
     SimpleImageBlock, ImagePullQuoteBlock, HTMLBlockWYSIWYG
 )
+from pageblocks.tests.factories import (
+    TextBlockFactory, HTMLBlockFactory, PullQuoteBlockFactory,
+    ImageBlockFactory, ImagePullQuoteBlockFactory,
+    HTMLBlockWYSIWYGFactory,
+)
 
 
 class TextBlockTest(TestCase):
+    def test_is_valid_from_factory(self):
+        b = TextBlockFactory()
+        b.full_clean()
+
     def test_add_form(self):
         f = TextBlock.add_form()
         self.assertTrue('body' in f.fields)
@@ -40,6 +49,10 @@ class TextBlockTest(TestCase):
 
 
 class HTMLBlockTest(TestCase):
+    def test_is_valid_from_factory(self):
+        b = HTMLBlockFactory()
+        b.full_clean()
+
     def test_add_form(self):
         f = HTMLBlock.add_form()
         self.assertTrue('html' in f.fields)
@@ -74,6 +87,10 @@ class HTMLBlockTest(TestCase):
 
 
 class PullQuoteBlockTest(TestCase):
+    def test_is_valid_from_factory(self):
+        b = PullQuoteBlockFactory()
+        b.full_clean()
+
     def test_add_form(self):
         f = PullQuoteBlock.add_form()
         self.assertTrue('body' in f.fields)
@@ -108,6 +125,10 @@ class PullQuoteBlockTest(TestCase):
 
 
 class ImageBlockTest(TestCase):
+    def test_is_valid_from_factory(self):
+        b = ImageBlockFactory()
+        b.full_clean()
+
     def test_add_form(self):
         f = ImageBlock.add_form()
         self.assertTrue('image' in f.fields)
@@ -176,6 +197,10 @@ class SimpleImageBlockTest(TestCase):
 
 
 class ImagePullQuoteBlockTest(TestCase):
+    def test_is_valid_from_factory(self):
+        b = ImagePullQuoteBlockFactory()
+        b.full_clean()
+
     def test_add_form(self):
         f = ImagePullQuoteBlock.add_form()
         self.assertTrue('image' in f.fields)
@@ -215,6 +240,10 @@ class ImagePullQuoteBlockTest(TestCase):
 
 
 class HTMLBlockWYSIWYGTest (TestCase):
+    def test_is_valid_from_factory(self):
+        b = HTMLBlockWYSIWYGFactory()
+        b.full_clean()
+
     def test_add_form(self):
         f = HTMLBlockWYSIWYG.add_form()
         self.assertTrue('wysiwyg_html' in f.fields)
