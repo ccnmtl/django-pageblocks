@@ -1,12 +1,10 @@
 from django.db import models
 from django.conf import settings
 from sorl.thumbnail.fields import ImageWithThumbnailsField
-from django.contrib.contenttypes import generic
 from django import forms
 import os
 from django.template.defaultfilters import slugify
 from datetime import datetime
-from pagetree.models import PageBlock
 from pagetree.generic.models import BasePageBlock
 
 try:
@@ -19,18 +17,11 @@ except ImportError:
     pass
 
 
-class TextBlock(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
+class TextBlock(BasePageBlock):
     body = models.TextField(blank=True)
 
     template_file = "pageblocks/textblock.html"
     display_name = "Text Block"
-
-    def __unicode__(self):
-        return unicode(self.pageblock())
-
-    def pageblock(self):
-        return self.pageblocks.first()
 
     @classmethod
     def add_form(cls):
@@ -67,18 +58,11 @@ class TextBlock(models.Model):
             return self.body[:61] + "..."
 
 
-class HTMLBlock(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
+class HTMLBlock(BasePageBlock):
     html = models.TextField(blank=True)
 
     template_file = "pageblocks/htmlblock.html"
     display_name = "HTML Block"
-
-    def pageblock(self):
-        return self.pageblocks.first()
-
-    def __unicode__(self):
-        return unicode(self.pageblock())
 
     def edit_form(self):
         class EditForm(forms.Form):
@@ -114,17 +98,10 @@ class HTMLBlock(models.Model):
             return self.html[:61].replace("<", "&lt;") + "..."
 
 
-class PullQuoteBlock(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
+class PullQuoteBlock(BasePageBlock):
     body = models.TextField(blank=True)
     template_file = "pageblocks/pullquoteblock.html"
     display_name = "Pull Quote"
-
-    def pageblock(self):
-        return self.pageblocks.first()
-
-    def __unicode__(self):
-        return unicode(self.pageblock())
 
     def edit_form(self):
         class EditForm(forms.Form):
@@ -160,12 +137,11 @@ class PullQuoteBlock(models.Model):
             return self.body[:61] + "..."
 
 
-class ImageBlock(models.Model):
+class ImageBlock(BasePageBlock):
     """
     ImageBlock allows the user to upload an image to
     the block, and includes automatic thumbnailing.
     """
-    pageblocks = generic.GenericRelation(PageBlock)
     image = ImageWithThumbnailsField(
         upload_to="images/%Y/%m/%d",
         thumbnail={
@@ -183,12 +159,6 @@ class ImageBlock(models.Model):
     template_file = "pageblocks/imageblock.html"
     display_name = "Image Block"
     summary_template_file = "pageblocks/imageblock_summary.html"
-
-    def pageblock(self):
-        return self.pageblocks.first()
-
-    def __unicode__(self):
-        return unicode(self.pageblock())
 
     def edit_form(self):
         class EditForm(forms.Form):
@@ -349,8 +319,7 @@ class SimpleImageBlock(BasePageBlock):
         self.save()
 
 
-class ImagePullQuoteBlock(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
+class ImagePullQuoteBlock(BasePageBlock):
     image = ImageWithThumbnailsField(
         upload_to="images/%Y/%m/%d",
         thumbnail={
@@ -368,12 +337,6 @@ class ImagePullQuoteBlock(models.Model):
     template_file = "pageblocks/imagepullquoteblock.html"
     summary_template_file = "pageblocks/imagepullquoteblock_summary.html"
     display_name = "Image Pullquote"
-
-    def pageblock(self):
-        return self.pageblocks.first()
-
-    def __unicode__(self):
-        return unicode(self.pageblock())
 
     def edit_form(self):
         class EditForm(forms.Form):
@@ -461,18 +424,11 @@ class ImagePullQuoteBlock(models.Model):
 # ./manage.py syncdb
 # Define custom styles in a file called tiny_mce.css
 # in your media/css directory
-class HTMLBlockWYSIWYG(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
+class HTMLBlockWYSIWYG(BasePageBlock):
     wysiwyg_html = models.TextField(blank=True)
 
     template_file = "pageblocks/htmlblock_wysiwyg.html"
     display_name = "WYSIWYG HTML Block"
-
-    def pageblock(self):
-        return self.pageblocks.first()
-
-    def __unicode__(self):
-        return unicode(self.pageblock())
 
     @classmethod
     def add_form(cls):
