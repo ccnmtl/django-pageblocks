@@ -1,4 +1,4 @@
-1.0.3
+1.0.3 (2015-06-19)
 ==================
 * Added SimpleImageBlock - an ImageBlock that doesn't include
   thumbnailing, or depend on sorl.
