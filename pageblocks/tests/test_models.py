@@ -1,10 +1,12 @@
 from django.test import TestCase
-from pageblocks.models import TextBlock, HTMLBlock, PullQuoteBlock, ImageBlock
-from pageblocks.models import ImagePullQuoteBlock, HTMLBlockWYSIWYG
+from pageblocks.models import (
+    TextBlock, HTMLBlock, PullQuoteBlock, ImageBlock,
+    SimpleImageBlock, ImagePullQuoteBlock, HTMLBlockWYSIWYG
+)
 from pageblocks.tests.factories import (
     TextBlockFactory, HTMLBlockFactory, PullQuoteBlockFactory,
     ImageBlockFactory, ImagePullQuoteBlockFactory,
-    HTMLBlockWYSIWYGFactory
+    HTMLBlockWYSIWYGFactory,
 )
 
 
@@ -160,6 +162,38 @@ class ImageBlockTest(TestCase):
     def test_list_resources(self):
         tb = ImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
         self.assertEqual(tb.list_resources(), ['foo/bar/blah.jpg'])
+
+
+class SimpleImageBlockTest(TestCase):
+    def test_add_form(self):
+        f = SimpleImageBlock.add_form()
+        self.assertTrue('image' in f.fields)
+        self.assertTrue('caption' in f.fields)
+        self.assertTrue('alt' in f.fields)
+
+    def test_create_from_dict(self):
+        d = dict(image='foo/bar/blah.jpg')
+        tb = SimpleImageBlock.create_from_dict(d)
+        self.assertEqual(tb.image, 'foo/bar/blah.jpg')
+        self.assertEqual(tb.caption, '')
+
+    def test_edit_form(self):
+        tb = SimpleImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
+        f = tb.edit_form()
+        self.assertTrue('caption' in f.fields)
+
+    def test_edit(self):
+        tb = SimpleImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
+        tb.edit(dict(image='foo/bar/blah.jpg', caption='bar'), [])
+        self.assertEqual(tb.caption, 'bar')
+
+    def test_as_dict(self):
+        tb = SimpleImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
+        self.assertEqual(
+            tb.as_dict(),
+            dict(image='foo/bar/blah.jpg',
+                 alt='',
+                 caption=''))
 
 
 class ImagePullQuoteBlockTest(TestCase):

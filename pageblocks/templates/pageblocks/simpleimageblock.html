@@ -1,0 +1,10 @@
+{% load markup %}
+<div class="{{block.css_extra}}">
+    <img alt="{{block.alt}}"
+         src="{{MEDIA_URL}}{{block.image.name}}" />
+    {% if block.caption %}
+    <div class="caption">
+        {{block.caption|markdown}}
+    </div>
+    {% endif %}
+</div>
