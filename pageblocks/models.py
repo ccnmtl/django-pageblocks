@@ -161,6 +161,10 @@ class PullQuoteBlock(models.Model):
 
 
 class ImageBlock(models.Model):
+    """
+    ImageBlock allows the user to upload an image to
+    the block, and includes automatic thumbnailing.
+    """
     pageblocks = generic.GenericRelation(PageBlock)
     image = ImageWithThumbnailsField(
         upload_to="images/%Y/%m/%d",
@@ -268,6 +272,10 @@ class ImageBlock(models.Model):
 
 
 class SimpleImageBlock(BasePageBlock):
+    """
+    SimpleImageBlock is ImageBlock without the automatic
+    thumbnailing functionality.
+    """
     image = models.ImageField(upload_to="images")
     caption = models.TextField(blank=True)
     alt = models.CharField(max_length=100, null=True, blank=True)
