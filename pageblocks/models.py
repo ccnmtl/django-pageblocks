@@ -1,5 +1,4 @@
 from django.db import models
-from pagetree.models import PageBlock
 from django.conf import settings
 from sorl.thumbnail.fields import ImageWithThumbnailsField
 from django.contrib.contenttypes import generic
@@ -7,6 +6,8 @@ from django import forms
 import os
 from django.template.defaultfilters import slugify
 from datetime import datetime
+from pagetree.models import PageBlock
+from pagetree.generic.models import BasePageBlock
 
 try:
     from south.modelsinspector import add_introspection_rules
@@ -249,7 +250,7 @@ class ImageBlock(models.Model):
         full_filename = path + "%s.%s" % (basename, ext)
         fd = self.image.storage.open(
             settings.MEDIA_ROOT + "/" + full_filename, 'wb')
-        
+
         for chunk in f.chunks():
             fd.write(chunk)
         fd.close()
@@ -264,6 +265,80 @@ class ImageBlock(models.Model):
 
     def list_resources(self):
         return [self.image.url]
+
+
+class SimpleImageBlock(BasePageBlock):
+    image = models.ImageField(upload_to="images")
+    caption = models.TextField(blank=True)
+    alt = models.CharField(max_length=100, null=True, blank=True)
+    template_file = "pageblocks/simpleimageblock.html"
+    display_name = "Simple Image Block"
+
+    def edit_form(self):
+        class EditForm(forms.Form):
+            image = forms.FileField(label="replace image")
+            caption = forms.CharField(initial=self.caption,
+                                      widget=forms.widgets.Textarea())
+            alt = forms.CharField(initial=self.alt)
+        return EditForm()
+
+    @classmethod
+    def add_form(cls):
+        class AddForm(forms.Form):
+            image = forms.FileField(label="select image")
+            caption = forms.CharField(widget=forms.widgets.Textarea())
+            alt = forms.CharField()
+        return AddForm()
+
+    @classmethod
+    def create(cls, request):
+        if 'image' in request.FILES:
+            ib = cls.objects.create(
+                alt=request.POST.get('alt', ''),
+                caption=request.POST.get('caption', ''),
+                image="")
+            ib.save_image(request.FILES['image'])
+            return ib
+        return None
+
+    @classmethod
+    def create_from_dict(cls, d):
+        # since it's coming from a dict, not a request
+        # we assume that some other part is handling the writing of
+        # the image file to disk and we just get a path to it
+        return cls.objects.create(
+            image=d.get('image', ''),
+            alt=d.get('alt', ''),
+            caption=d.get('caption', ''))
+
+    def as_dict(self):
+        return dict(image=self.image.name,
+                    alt=self.alt,
+                    caption=self.caption)
+
+    def edit(self, vals, files):
+        self.caption = vals.get('caption', '')
+        self.alt = vals.get('alt', '')
+        if 'image' in files:
+            self.save_image(files['image'])
+        self.save()
+
+    def save_image(self, f):
+        ext = f.name.split(".")[-1].lower()
+        basename = slugify(f.name.split(".")[-2].lower())[:20]
+        if ext not in ['jpg', 'jpeg', 'gif', 'png']:
+            # unsupported image format
+            return None
+        full_filename = "%s/%s.%s" % (
+            self.image.field.upload_to, basename, ext)
+        fd = self.image.storage.open(
+            settings.MEDIA_ROOT + "/" + full_filename, 'wb')
+
+        for chunk in f.chunks():
+            fd.write(chunk)
+        fd.close()
+        self.image = full_filename
+        self.save()
 
 
 class ImagePullQuoteBlock(models.Model):

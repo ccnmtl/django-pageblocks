@@ -34,6 +34,7 @@ setup(
     description="Basic Pageblocks to go along with django-pagetree",
     long_description="generic pageblocks",
     install_requires = [
+        "django-pagetree>=1.1.0",
         "sorl==3.1",
     ],
     scripts = [],
