@@ -3,7 +3,7 @@ from factory.fuzzy import FuzzyText
 
 from pageblocks.models import (
     TextBlock, HTMLBlock, PullQuoteBlock, ImageBlock,
-    ImagePullQuoteBlock, HTMLBlockWYSIWYG
+    SimpleImageBlock, ImagePullQuoteBlock, HTMLBlockWYSIWYG
 )
 
 
@@ -31,6 +31,14 @@ class PullQuoteBlockFactory(factory.DjangoModelFactory):
 class ImageBlockFactory(factory.DjangoModelFactory):
     class Meta:
         model = ImageBlock
+
+    image = factory.django.FileField()
+    caption = FuzzyText()
+
+
+class SimpleImageBlockFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = SimpleImageBlock
 
     image = factory.django.FileField()
     caption = FuzzyText()

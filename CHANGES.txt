@@ -1,3 +1,9 @@
+1.0.3
+==================
+* Added SimpleImageBlock - an ImageBlock that doesn't include
+  thumbnailing, or depend on sorl.
+* Added factories for all the blocks in pageblocks.tests.factories.
+
 1.0.2 (2015-04-22)
 ==================
 * Now compatible with Django 1.8

@@ -5,7 +5,7 @@ from pageblocks.models import (
 )
 from pageblocks.tests.factories import (
     TextBlockFactory, HTMLBlockFactory, PullQuoteBlockFactory,
-    ImageBlockFactory, ImagePullQuoteBlockFactory,
+    ImageBlockFactory, SimpleImageBlockFactory, ImagePullQuoteBlockFactory,
     HTMLBlockWYSIWYGFactory,
 )
 
@@ -165,6 +165,10 @@ class ImageBlockTest(TestCase):
 
 
 class SimpleImageBlockTest(TestCase):
+    def test_is_valid_from_factory(self):
+        b = SimpleImageBlockFactory()
+        b.full_clean()
+
     def test_add_form(self):
         f = SimpleImageBlock.add_form()
         self.assertTrue('image' in f.fields)
