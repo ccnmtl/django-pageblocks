@@ -414,3 +414,4 @@ class HTMLFormWYSIWYG(forms.ModelForm):
             'wysiwyg_html': forms.Textarea(
                 attrs={'cols': 80, 'rows': 20, 'class': 'mceEditor'}),
         }
+        exclude = []
