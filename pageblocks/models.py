@@ -217,13 +217,14 @@ class ImageBlock(BasePageBlock):
             return None
         now = datetime.now()
         path = "images/%04d/%02d/%02d/" % (now.year, now.month, now.day)
+        full_filename = path + "%s.%s" % (basename, ext)
+
         try:
             os.makedirs(settings.MEDIA_ROOT + "/" + path)
+            fd = self.image.storage.open(
+                settings.MEDIA_ROOT + "/" + full_filename, 'wb')
         except:
-            pass
-        full_filename = path + "%s.%s" % (basename, ext)
-        fd = self.image.storage.open(
-            settings.MEDIA_ROOT + "/" + full_filename, 'wb')
+            fd = self.image.storage.open(full_filename, 'wb')
 
         for chunk in f.chunks():
             fd.write(chunk)
@@ -415,9 +416,9 @@ class ImagePullQuoteBlock(BasePageBlock):
 # Using the HTMLBlockWYSIWYG
 # Install tinymce into your project: http://code.google.com/p/django-tinymce/
 # Override the admin/base-site.html:
-## Include: <script type="text/javascript"
-##          src="/site_media/js/tiny_mce/tiny_mce.js"></script>
-## And, add the init code immediately thereafter.
+# Include: <script type="text/javascript"
+#          src="/site_media/js/tiny_mce/tiny_mce.js"></script>
+# And, add the init code immediately thereafter.
 # To your settings_shared.py add 'pageblocks.HTMLBlockWYSIWYG'.
 # Consider removing the generic HTMLBlock if you don't need it.
 #  Reduces confusion.
