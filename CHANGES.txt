@@ -1,3 +1,7 @@
+1.0.4 (2016-01-30)
+==================
+* ImageBlock - tune save to work with either file system or remote storage
+
 1.0.3 (2015-06-19)
 ==================
 * Added SimpleImageBlock - an ImageBlock that doesn't include
