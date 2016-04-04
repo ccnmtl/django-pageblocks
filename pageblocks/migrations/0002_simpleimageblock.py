@@ -14,10 +14,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SimpleImageBlock',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(
+                    verbose_name='ID',
+                    serialize=False,
+                    auto_created=True,
+                    primary_key=True)),
                 ('image', models.ImageField(upload_to=b'images')),
                 ('caption', models.TextField(blank=True)),
-                ('alt', models.CharField(max_length=100, null=True, blank=True)),
+                ('alt', models.CharField(
+                    max_length=100, null=True, blank=True)),
             ],
             options={
                 'abstract': False,
