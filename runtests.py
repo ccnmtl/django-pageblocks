@@ -24,21 +24,21 @@ def main():
             'pageblocks',
             'django_jenkins',
         ),
-        TEST_RUNNER = 'django.test.runner.DiscoverRunner',
+        TEST_RUNNER='django.test.runner.DiscoverRunner',
 
-        JENKINS_TASKS = (
+        JENKINS_TASKS=(
             'django_jenkins.tasks.with_coverage',
         ),
-        PROJECT_APPS = [
+        PROJECT_APPS=[
             'pageblocks',
         ],
-        COVERAGE_EXCLUDES_FOLDERS = ['migrations'],
-        ROOT_URLCONF = [],
-        PAGEBLOCKS = ['pagetree.TestBlock', ],
+        COVERAGE_EXCLUDES_FOLDERS=['migrations'],
+        ROOT_URLCONF=[],
+        PAGEBLOCKS=['pagetree.TestBlock', ],
         SOUTH_TESTS_MIGRATE=False,
 
         # Django replaces this, but it still wants it. *shrugs*
-        DATABASES = {
+        DATABASES={
             'default': {
                 'ENGINE': 'django.db.backends.sqlite3',
                 'NAME': ':memory:',
