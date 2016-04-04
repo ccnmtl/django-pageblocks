@@ -72,7 +72,7 @@ class Image(object):
         zipfile.write(block.image.file.name, arcname=filename)
         print >> xmlfile, \
             u"""<img src="%s" caption="%s" />""" % (
-            filename, block.caption)
+                filename, block.caption)
 
     def importer(self, node, zipfile):
         children = node.getchildren()

@@ -14,6 +14,7 @@ install:
 
 # command to run tests
 script:
+  - flake8 runtests.py pageblocks --exclude south_migrations
   - python runtests.py
 notifications:
   slack: ccnmtl:GizSNscLWJLldjQrffB8mwgm
