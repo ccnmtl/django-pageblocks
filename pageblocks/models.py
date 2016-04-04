@@ -220,11 +220,12 @@ class ImageBlock(BasePageBlock):
         full_filename = path + "%s.%s" % (basename, ext)
 
         try:
-            os.makedirs(settings.MEDIA_ROOT + "/" + path)
-            fd = self.image.storage.open(
-                settings.MEDIA_ROOT + "/" + full_filename, 'wb')
+            os.makedirs(settings.MEDIA_ROOT + '/' + path)
+            filepath = settings.MEDIA_ROOT + '/'
         except:
-            fd = self.image.storage.open(full_filename, 'wb')
+            filepath = ''
+
+        fd = self.image.storage.open(filepath + full_filename, 'wb')
 
         for chunk in f.chunks():
             fd.write(chunk)
