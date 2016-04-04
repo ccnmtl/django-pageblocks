@@ -57,7 +57,7 @@ def main():
         pass
 
     # Fire off the tests
-    call_command('jenkins')
+    call_command('test')
 
 if __name__ == '__main__':
     main()

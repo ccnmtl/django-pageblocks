@@ -2,7 +2,6 @@ import os
 from django.core.files import File
 from models import TextBlock, HTMLBlock, PullQuoteBlock, ImageBlock
 from models import ImagePullQuoteBlock
-#from pagetree.models import *
 
 from pagetree_export import register_class as register
 
