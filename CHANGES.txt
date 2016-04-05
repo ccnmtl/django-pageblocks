@@ -1,3 +1,5 @@
+* made caption/alt fields not required in add/edit forms
+
 1.0.4 (2016-01-30)
 ==================
 * ImageBlock - tune save to work with either file system or remote storage
