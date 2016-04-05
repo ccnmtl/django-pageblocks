@@ -135,6 +135,8 @@ class ImageBlockTest(TestCase):
         self.assertTrue('caption' in f.fields)
         self.assertTrue('alt' in f.fields)
         self.assertTrue('lightbox' in f.fields)
+        self.assertFalse(f.fields['caption'].required)
+        self.assertFalse(f.fields['alt'].required)
 
     def test_create_from_dict(self):
         d = dict(image='foo/bar/blah.jpg')
@@ -146,6 +148,8 @@ class ImageBlockTest(TestCase):
         tb = ImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
         f = tb.edit_form()
         self.assertTrue('caption' in f.fields)
+        self.assertFalse(f.fields['caption'].required)
+        self.assertFalse(f.fields['alt'].required)
 
     def test_edit(self):
         tb = ImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
@@ -174,6 +178,8 @@ class SimpleImageBlockTest(TestCase):
         self.assertTrue('image' in f.fields)
         self.assertTrue('caption' in f.fields)
         self.assertTrue('alt' in f.fields)
+        self.assertFalse(f.fields['caption'].required)
+        self.assertFalse(f.fields['alt'].required)
 
     def test_create_from_dict(self):
         d = dict(image='foo/bar/blah.jpg')
@@ -185,6 +191,8 @@ class SimpleImageBlockTest(TestCase):
         tb = SimpleImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
         f = tb.edit_form()
         self.assertTrue('caption' in f.fields)
+        self.assertFalse(f.fields['caption'].required)
+        self.assertFalse(f.fields['alt'].required)
 
     def test_edit(self):
         tb = SimpleImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
@@ -210,6 +218,8 @@ class ImagePullQuoteBlockTest(TestCase):
         self.assertTrue('image' in f.fields)
         self.assertTrue('caption' in f.fields)
         self.assertTrue('alt' in f.fields)
+        self.assertFalse(f.fields['caption'].required)
+        self.assertFalse(f.fields['alt'].required)
 
     def test_create_from_dict(self):
         d = dict(image='foo/bar/blah.jpg')
@@ -222,6 +232,8 @@ class ImagePullQuoteBlockTest(TestCase):
             dict(image='foo/bar/blah.jpg'))
         f = tb.edit_form()
         self.assertTrue('caption' in f.fields)
+        self.assertFalse(f.fields['caption'].required)
+        self.assertFalse(f.fields['alt'].required)
 
     def test_edit(self):
         tb = ImagePullQuoteBlock.create_from_dict(

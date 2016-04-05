@@ -163,9 +163,15 @@ class ImageBlock(BasePageBlock):
     def edit_form(self):
         class EditForm(forms.Form):
             image = forms.FileField(label="replace image")
-            caption = forms.CharField(initial=self.caption,
-                                      widget=forms.widgets.Textarea())
-            alt = forms.CharField(initial=self.alt)
+            caption = forms.CharField(
+                initial=self.caption,
+                required=False,
+                widget=forms.widgets.Textarea(),
+            )
+            alt = forms.CharField(
+                initial=self.alt,
+                required=False,
+            )
             lightbox = forms.BooleanField(initial=self.lightbox)
         return EditForm()
 
@@ -173,8 +179,9 @@ class ImageBlock(BasePageBlock):
     def add_form(cls):
         class AddForm(forms.Form):
             image = forms.FileField(label="select image")
-            caption = forms.CharField(widget=forms.widgets.Textarea())
-            alt = forms.CharField()
+            caption = forms.CharField(widget=forms.widgets.Textarea(),
+                                      required=False)
+            alt = forms.CharField(required=False)
             lightbox = forms.BooleanField()
         return AddForm()
 
@@ -257,16 +264,18 @@ class SimpleImageBlock(BasePageBlock):
         class EditForm(forms.Form):
             image = forms.FileField(label="replace image")
             caption = forms.CharField(initial=self.caption,
+                                      required=False,
                                       widget=forms.widgets.Textarea())
-            alt = forms.CharField(initial=self.alt)
+            alt = forms.CharField(initial=self.alt, required=False)
         return EditForm()
 
     @classmethod
     def add_form(cls):
         class AddForm(forms.Form):
             image = forms.FileField(label="select image")
-            caption = forms.CharField(widget=forms.widgets.Textarea())
-            alt = forms.CharField()
+            caption = forms.CharField(widget=forms.widgets.Textarea(),
+                                      required=False)
+            alt = forms.CharField(required=False)
         return AddForm()
 
     @classmethod
@@ -343,16 +352,18 @@ class ImagePullQuoteBlock(BasePageBlock):
         class EditForm(forms.Form):
             image = forms.FileField(label="replace image")
             caption = forms.CharField(initial=self.caption,
+                                      required=False,
                                       widget=forms.widgets.Textarea())
-            alt = forms.CharField(initial=self.alt)
+            alt = forms.CharField(initial=self.alt, required=False)
         return EditForm()
 
     @classmethod
     def add_form(cls):
         class AddForm(forms.Form):
             image = forms.FileField(label="select image")
-            caption = forms.CharField(widget=forms.widgets.Textarea())
-            alt = forms.CharField()
+            caption = forms.CharField(widget=forms.widgets.Textarea(),
+                                      required=False)
+            alt = forms.CharField(required=False)
         return AddForm()
 
     @classmethod
