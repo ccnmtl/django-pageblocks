@@ -2,7 +2,7 @@ from django.db import models
 from pagetree.models import PageBlock
 from django.conf import settings
 from sorl.thumbnail.fields import ImageWithThumbnailsField
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericRelation
 from django import forms
 import os
 from django.template.defaultfilters import slugify
@@ -10,7 +10,7 @@ from datetime import datetime
 
 
 class TextBlock(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
+    pageblocks = GenericRelation(PageBlock)
     body = models.TextField(blank=True)
 
     template_file = "pageblocks/textblock.html"
@@ -58,7 +58,7 @@ class TextBlock(models.Model):
 
 
 class HTMLBlock(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
+    pageblocks = GenericRelation(PageBlock)
     html = models.TextField(blank=True)
 
     template_file = "pageblocks/htmlblock.html"
@@ -105,7 +105,7 @@ class HTMLBlock(models.Model):
 
 
 class PullQuoteBlock(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
+    pageblocks = GenericRelation(PageBlock)
     body = models.TextField(blank=True)
     template_file = "pageblocks/pullquoteblock.html"
     display_name = "Pull Quote"
@@ -151,7 +151,7 @@ class PullQuoteBlock(models.Model):
 
 
 class ImageBlock(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
+    pageblocks = GenericRelation(PageBlock)
     image = ImageWithThumbnailsField(
         upload_to="images/%Y/%m/%d",
         thumbnail={
@@ -256,7 +256,7 @@ class ImageBlock(models.Model):
 
 
 class ImagePullQuoteBlock(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
+    pageblocks = GenericRelation(PageBlock)
     image = ImageWithThumbnailsField(
         upload_to="images/%Y/%m/%d",
         thumbnail={
@@ -368,7 +368,7 @@ class ImagePullQuoteBlock(models.Model):
 # Define custom styles in a file called tiny_mce.css
 # in your media/css directory
 class HTMLBlockWYSIWYG(models.Model):
-    pageblocks = generic.GenericRelation(PageBlock)
+    pageblocks = GenericRelation(PageBlock)
     wysiwyg_html = models.TextField(blank=True)
 
     template_file = "pageblocks/htmlblock_wysiwyg.html"
