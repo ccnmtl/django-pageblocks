@@ -1,3 +1,7 @@
+1.1.0 (2016-08-12)
+==================
+
+* django 1.10 support
 * made caption/alt fields not required in add/edit forms
 
 1.0.4 (2016-01-30)
