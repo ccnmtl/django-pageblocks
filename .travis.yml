@@ -3,7 +3,6 @@ sudo: false
 python:
   - "2.7"
 env:
-  - DJANGO="Django>=1.7.0,<1.8.0"
   - DJANGO="Django>=1.8.0,<1.9.0"
   - DJANGO="Django>=1.9.0,<1.10.0"
   - DJANGO="Django>=1.10.0,<1.11.0"
@@ -15,7 +14,7 @@ install:
 
 # command to run tests
 script:
-  - flake8 runtests.py pageblocks --exclude south_migrations
+  - flake8 runtests.py pageblocks
   - python runtests.py
 notifications:
   slack: ccnmtl:GizSNscLWJLldjQrffB8mwgm

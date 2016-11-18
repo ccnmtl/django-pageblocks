@@ -35,7 +35,6 @@ def main():
         COVERAGE_EXCLUDES_FOLDERS=['migrations'],
         ROOT_URLCONF=[],
         PAGEBLOCKS=['pagetree.TestBlock', ],
-        SOUTH_TESTS_MIGRATE=False,
 
         # Django replaces this, but it still wants it. *shrugs*
         DATABASES={
@@ -50,11 +49,7 @@ def main():
             }
     )
 
-    try:
-        # required by Django 1.7 and later
-        django.setup()
-    except AttributeError:
-        pass
+    django.setup()
 
     # Fire off the tests
     call_command('test')
