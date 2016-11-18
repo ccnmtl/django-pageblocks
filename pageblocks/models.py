@@ -7,15 +7,6 @@ from django.template.defaultfilters import slugify
 from datetime import datetime
 from pagetree.generic.models import BasePageBlock
 
-try:
-    from south.modelsinspector import add_introspection_rules
-    add_introspection_rules(
-        [],
-        ["^sorl\.thumbnail\.fields\.ImageWithThumbnailsField$"])
-except ImportError:
-    # no south if we're on django 1.7+
-    pass
-
 
 class TextBlock(BasePageBlock):
     body = models.TextField(blank=True)
