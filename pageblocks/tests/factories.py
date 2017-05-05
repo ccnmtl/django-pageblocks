@@ -32,7 +32,7 @@ class SimpleImageBlockFactory(factory.DjangoModelFactory):
     class Meta:
         model = SimpleImageBlock
 
-    image = factory.django.FileField()
+    image = factory.django.ImageField()
     caption = FuzzyText()
 
 
