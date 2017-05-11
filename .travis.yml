@@ -1,20 +1,25 @@
 language: python
 sudo: false
 python:
-  - "2.7"
+- '2.7'
 env:
-  - DJANGO="Django>=1.8.0,<1.9.0"
-  - DJANGO="Django>=1.10.0,<1.11.0"
-  - DJANGO="Django>=1.11,<1.12.0"
-
-# command to install dependencies
+- DJANGO="Django>=1.8.0,<1.9.0"
+- DJANGO="Django>=1.10.0,<1.11.0"
+- DJANGO="Django>=1.11,<1.12.0"
 install:
-  - pip install -q $DJANGO
-  - pip install -q -r test_reqs.txt
-
-# command to run tests
+- pip install -q $DJANGO
+- pip install -q -r test_reqs.txt
 script:
-  - flake8 runtests.py pageblocks
-  - python runtests.py
+- flake8 runtests.py pageblocks
+- python runtests.py
 notifications:
   slack: ccnmtl:GizSNscLWJLldjQrffB8mwgm
+deploy:
+  provider: pypi
+  user: ctlpypi
+  password:
+    secure: KMC+MdDu1TTk61YcBOriXogQ1yUbiPRU22EUCp8yNmmu8ebowLGbXc4RZJPgyb+twKBOHc4SksQUwoAqIDKdLToZP2cg/uwKMX8JUEtvaRhWsWv0+I3RSz4BK0MX/QD9C06RJ6ewtfjsKuD6RUbeErMkp3vU3cXesCNF43+ZBvg=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: ccnmtl/django-pageblocks
