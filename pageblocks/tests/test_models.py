@@ -1,4 +1,6 @@
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
+from django.test.client import RequestFactory
 from pageblocks.models import (
     TextBlock, HTMLBlock, PullQuoteBlock, ImageBlock,
     SimpleImageBlock, ImagePullQuoteBlock, HTMLBlockWYSIWYG
@@ -125,6 +127,7 @@ class PullQuoteBlockTest(TestCase):
 
 
 class ImageBlockTest(TestCase):
+
     def test_is_valid_from_factory(self):
         b = ImageBlockFactory()
         b.full_clean()
@@ -166,6 +169,21 @@ class ImageBlockTest(TestCase):
     def test_list_resources(self):
         tb = ImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
         self.assertEqual(tb.list_resources(), ['foo/bar/blah.jpg'])
+
+    def test_create(self):
+        f = SimpleUploadedFile('file.txt', 'file_content')
+
+        data = {'lightbox': 'on',
+                'alt': 'alt text',
+                'caption': 'caption text',
+                'image': f}
+
+        request = RequestFactory().post('', data)
+
+        ib = ImageBlock.create(request)
+        self.assertTrue(ib.lightbox)
+        self.assertEquals(ib.alt, 'alt text')
+        self.assertEquals(ib.caption, 'caption text')
 
 
 class SimpleImageBlockTest(TestCase):

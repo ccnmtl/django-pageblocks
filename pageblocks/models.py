@@ -163,7 +163,8 @@ class ImageBlock(BasePageBlock):
                 initial=self.alt,
                 required=False,
             )
-            lightbox = forms.BooleanField(initial=self.lightbox)
+            lightbox = forms.BooleanField(
+                initial=self.lightbox, required=False)
         return EditForm()
 
     @classmethod
@@ -173,16 +174,17 @@ class ImageBlock(BasePageBlock):
             caption = forms.CharField(widget=forms.widgets.Textarea(),
                                       required=False)
             alt = forms.CharField(required=False)
-            lightbox = forms.BooleanField()
+            lightbox = forms.BooleanField(initial=False, required=False)
         return AddForm()
 
     @classmethod
     def create(cls, request):
         if 'image' in request.FILES:
+            lightbox = request.POST.get('lightbox', False)
             ib = cls.objects.create(
                 alt=request.POST.get('alt', ''),
                 caption=request.POST.get('caption', ''),
-                lightbox=request.POST.get('lightbox', False),
+                lightbox=lightbox in ('True', True, 'on'),
                 image="")
             ib.save_image(request.FILES['image'])
             return ib
