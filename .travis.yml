@@ -22,4 +22,5 @@ deploy:
   on:
     tags: true
     repo: ccnmtl/django-pageblocks
+    all_branches: true
 
