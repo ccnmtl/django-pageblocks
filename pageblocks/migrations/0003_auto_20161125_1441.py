@@ -12,10 +12,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.DeleteModel(
-            name='ImageBlock',
-        ),
-        migrations.DeleteModel(
-            name='ImagePullQuoteBlock',
-        ),
     ]
