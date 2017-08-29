@@ -2,6 +2,8 @@
 ==================
 * Removed ImageBlock and ImagePullQuoteBlock. To use these models,
   you can find them in the django-sorlimageblock package.
+* Removed dependency on our outdated `sorl` package, which isn't present
+  on pypi.python.org.
 
 1.1.0 (2016-08-12)
 ==================
