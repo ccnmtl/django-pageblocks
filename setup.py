@@ -29,7 +29,7 @@ setup(
     name="django-pageblocks",
     version="1.1.0",
     author="Anders Pearson",
-    author_email="anders@columbia.edu",
+    author_email="ccnmtl-dev@columbia.edu",
     url="https://github.com/ccnmtl/django-pageblocks",
     description="Basic Pageblocks to go along with django-pagetree",
     long_description="generic pageblocks",
