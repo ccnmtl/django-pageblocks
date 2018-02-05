@@ -12,4 +12,4 @@ coverage==4.4.2
 pep8==1.7.1
 pyflakes==1.6.0
 Pillow==5.0.0
-factory_boy==2.9.2
+factory_boy==2.10.0
