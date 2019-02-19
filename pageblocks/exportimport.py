@@ -1,6 +1,6 @@
+from __future__ import print_function
 import os
 from models import TextBlock, HTMLBlock, PullQuoteBlock, SimpleImageBlock
-
 from pagetree_export import register_class as register
 
 
