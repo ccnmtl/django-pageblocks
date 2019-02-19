@@ -1,6 +1,6 @@
+from __future__ import print_function
 import os
 from models import TextBlock, HTMLBlock, PullQuoteBlock, SimpleImageBlock
-
 from pagetree_export import register_class as register
 
 
@@ -12,7 +12,7 @@ class Text(object):
     def exporter(self, block, xmlfile, zipfile):
         filename = "pageblocks/%s.txt" % block.pageblock().pk
         zipfile.writestr(filename, block.body.encode("utf8"))
-        print >> xmlfile, """<text src="%s" />""" % filename
+        print("""text src="%s" />""" % filename, file=xmlfile)
 
     def importer(self, node, zipfile):
         children = node.getchildren()
@@ -32,7 +32,7 @@ class HTML(object):
     def exporter(self, block, xmlfile, zipfile):
         filename = "pageblocks/%s.html" % block.pageblock().pk
         zipfile.writestr(filename, block.html.encode("utf8"))
-        print >> xmlfile, """<html src="%s" />""" % filename
+        print("""<html src="%s" />""" % filename, file=xmlfile)
 
     def importer(self, node, zipfile):
         children = node.getchildren()
