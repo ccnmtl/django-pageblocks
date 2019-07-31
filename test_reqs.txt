@@ -7,7 +7,7 @@ django-jenkins==0.110.0
 
 flake8==3.7.8
 
-coverage==4.5.3
+coverage==4.5.4
 
 pep8==1.7.1
 pyflakes==2.1.1
