@@ -6,6 +6,7 @@ $ ./ve/bin/python runtests.py
 """
 
 
+import django
 from django.conf import settings
 from django.core.management import call_command
 
@@ -21,29 +22,20 @@ def main():
             'pagetree',
             'pageblocks',
             'django_nose',
-            'django.contrib.markup',
-            'django_jenkins',
         ),
-        TEST_RUNNER = 'django_nose.NoseTestSuiteRunner',
+        TEST_RUNNER='django_nose.NoseTestSuiteRunner',
 
-        NOSE_ARGS = [
-            '--with-coverage',
+        NOSE_ARGS=[
             '--cover-package=pageblocks',
         ],
-        JENKINS_TASKS = (
-            'django_jenkins.tasks.with_coverage',
-            'django_jenkins.tasks.django_tests',
-        ),
-        PROJECT_APPS = [
+        PROJECT_APPS=[
             'pageblocks',
         ],
-        COVERAGE_EXCLUDES_FOLDERS = ['migrations'],
-        ROOT_URLCONF = [],
-        PAGEBLOCKS = ['pagetree.TestBlock', ],
-        SOUTH_TESTS_MIGRATE=False,
+        ROOT_URLCONF=[],
+        PAGEBLOCKS=['pagetree.TestBlock', ],
 
         # Django replaces this, but it still wants it. *shrugs*
-        DATABASES = {
+        DATABASES={
             'default': {
                 'ENGINE': 'django.db.backends.sqlite3',
                 'NAME': ':memory:',
@@ -51,12 +43,15 @@ def main():
                 'PORT': '',
                 'USER': '',
                 'PASSWORD': '',
-                }
             }
+        }
     )
 
+    django.setup()
+
     # Fire off the tests
-    call_command('jenkins')
+    call_command('test')
+
 
 if __name__ == '__main__':
     main()

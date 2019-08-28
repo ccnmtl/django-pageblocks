@@ -27,10 +27,10 @@ from setuptools import setup
 
 setup(
     name="django-pageblocks",
-    version="0.5.16",
+    version="0.5.17",
     author="Anders Pearson",
-    author_email="anders@columbia.edu",
-    url="",
+    author_email="ctl-dev@columbia.edu",
+    url="https://github.com/ccnmtl/django-pageblocks",
     description="Basic Pageblocks to go along with django-pagetree",
     long_description="generic pageblocks",
     install_requires = [],
