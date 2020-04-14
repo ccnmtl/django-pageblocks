@@ -10,7 +10,7 @@ flake8==3.7.9
 coverage==5.0.4
 
 pep8==1.7.1
-pyflakes==2.1.1
+pyflakes==2.2.0
 Pillow==7.1.1
 factory_boy==2.12.0
 functools32==3.2.3-2; python_version < '3'
