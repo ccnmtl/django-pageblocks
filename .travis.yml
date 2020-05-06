@@ -12,14 +12,3 @@ install:
 script:
   - flake8 runtests.py pageblocks
   - python runtests.py
-notifications:
-  slack: ccnmtl:GizSNscLWJLldjQrffB8mwgm
-deploy:
-  provider: pypi
-  distributions: "sdist bdist_wheel"
-  user: ctlpypi
-  password:
-    secure: KMC+MdDu1TTk61YcBOriXogQ1yUbiPRU22EUCp8yNmmu8ebowLGbXc4RZJPgyb+twKBOHc4SksQUwoAqIDKdLToZP2cg/uwKMX8JUEtvaRhWsWv0+I3RSz4BK0MX/QD9C06RJ6ewtfjsKuD6RUbeErMkp3vU3cXesCNF43+ZBvg=
-  on:
-    tags: true
-    repo: ccnmtl/django-pageblocks
