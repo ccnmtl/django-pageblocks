@@ -5,7 +5,7 @@ django-pagetree==1.4.2
 
 django-jenkins==0.110.0
 
-flake8==3.8.3
+flake8==3.8.4
 
 coverage==5.3
 
