@@ -12,3 +12,4 @@ reports/
 .pydevproject
 .settings/
 /images
+.coverage
