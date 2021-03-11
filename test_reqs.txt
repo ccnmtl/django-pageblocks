@@ -1,7 +1,7 @@
 django-treebeard==4.4
 Markdown==3.2.2
 django-markwhat==1.6.2
-django-pagetree==1.4.2
+django-pagetree==1.4.3
 django-jenkins==0.110.0
 importlib-metadata==3.4.0  # for flake8
 typing_extensions==3.7.4.3
