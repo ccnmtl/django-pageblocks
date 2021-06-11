@@ -7,28 +7,28 @@ from pageblocks.models import (
 )
 
 
-class TextBlockFactory(factory.DjangoModelFactory):
+class TextBlockFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = TextBlock
 
     body = FuzzyText()
 
 
-class HTMLBlockFactory(factory.DjangoModelFactory):
+class HTMLBlockFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = HTMLBlock
 
     html = FuzzyText()
 
 
-class PullQuoteBlockFactory(factory.DjangoModelFactory):
+class PullQuoteBlockFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = PullQuoteBlock
 
     body = FuzzyText()
 
 
-class SimpleImageBlockFactory(factory.DjangoModelFactory):
+class SimpleImageBlockFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = SimpleImageBlock
 
@@ -36,7 +36,7 @@ class SimpleImageBlockFactory(factory.DjangoModelFactory):
     caption = FuzzyText()
 
 
-class HTMLBlockWYSIWYGFactory(factory.DjangoModelFactory):
+class HTMLBlockWYSIWYGFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = HTMLBlockWYSIWYG
 
