@@ -1,5 +1,5 @@
 django-treebeard==4.4
-Markdown==3.2.2
+Markdown==3.3.4
 django-markwhat==1.6.2
 django-pagetree==1.4.3
 django-jenkins==0.110.0
