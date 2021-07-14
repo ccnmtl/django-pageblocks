@@ -17,6 +17,6 @@ functools32==3.2.3-2; python_version < '3'
 entrypoints==0.3
 pycodestyle==2.7.0
 mccabe==0.6.1
-python-dateutil==2.8.1
+python-dateutil==2.8.2
 text-unidecode==1.3
 six==1.16.0
