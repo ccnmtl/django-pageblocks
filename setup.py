@@ -1,4 +1,4 @@
-# Copyright (c) 2007-2015, Columbia Center For New Media Teaching And Learning (CCNMTL)
+# Copyright (c) 2007, Columbia Center For New Media Teaching And Learning (CCNMTL)
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -27,20 +27,20 @@ from setuptools import setup
 
 setup(
     name="django-pageblocks",
-    version="2.0.0",
+    version="0.5.17",
     author="Anders Pearson",
-    author_email="ccnmtl-dev@columbia.edu",
+    author_email="ctl-dev@columbia.edu",
     url="https://github.com/ccnmtl/django-pageblocks",
     description="Basic Pageblocks to go along with django-pagetree",
     long_description="generic pageblocks",
-    install_requires = [
-        "django-pagetree>=1.1.0",
-    ],
+    install_requires = [],
     scripts = [],
     license = "BSD",
     platforms = ["any"],
     zip_safe=False,
+#    package_data = {'' : ['*.*']},
     packages=['pageblocks'],
+    test_suite='nose.collector',
     include_package_data=True,
 
     )

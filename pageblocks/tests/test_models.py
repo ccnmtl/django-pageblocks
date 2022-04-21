@@ -1,19 +1,9 @@
 from django.test import TestCase
-from pageblocks.models import (
-    TextBlock, HTMLBlock, PullQuoteBlock,
-    SimpleImageBlock, HTMLBlockWYSIWYG
-)
-from pageblocks.tests.factories import (
-    TextBlockFactory, HTMLBlockFactory, PullQuoteBlockFactory,
-    SimpleImageBlockFactory, HTMLBlockWYSIWYGFactory,
-)
+from pageblocks.models import TextBlock, HTMLBlock, PullQuoteBlock, ImageBlock
+from pageblocks.models import ImagePullQuoteBlock, HTMLBlockWYSIWYG
 
 
 class TextBlockTest(TestCase):
-    def test_is_valid_from_factory(self):
-        b = TextBlockFactory()
-        b.full_clean()
-
     def test_add_form(self):
         f = TextBlock.add_form()
         self.assertTrue('body' in f.fields)
@@ -48,10 +38,6 @@ class TextBlockTest(TestCase):
 
 
 class HTMLBlockTest(TestCase):
-    def test_is_valid_from_factory(self):
-        b = HTMLBlockFactory()
-        b.full_clean()
-
     def test_add_form(self):
         f = HTMLBlock.add_form()
         self.assertTrue('html' in f.fields)
@@ -86,10 +72,6 @@ class HTMLBlockTest(TestCase):
 
 
 class PullQuoteBlockTest(TestCase):
-    def test_is_valid_from_factory(self):
-        b = PullQuoteBlockFactory()
-        b.full_clean()
-
     def test_add_form(self):
         f = PullQuoteBlock.add_form()
         self.assertTrue('body' in f.fields)
@@ -123,51 +105,82 @@ class PullQuoteBlockTest(TestCase):
         self.assertEqual(len(tb.summary_render()), 64)
 
 
-class SimpleImageBlockTest(TestCase):
-    def test_is_valid_from_factory(self):
-        b = SimpleImageBlockFactory()
-        b.full_clean()
-
+class ImageBlockTest(TestCase):
     def test_add_form(self):
-        f = SimpleImageBlock.add_form()
+        f = ImageBlock.add_form()
         self.assertTrue('image' in f.fields)
         self.assertTrue('caption' in f.fields)
         self.assertTrue('alt' in f.fields)
-        self.assertFalse(f.fields['caption'].required)
-        self.assertFalse(f.fields['alt'].required)
+        self.assertTrue('lightbox' in f.fields)
 
     def test_create_from_dict(self):
         d = dict(image='foo/bar/blah.jpg')
-        tb = SimpleImageBlock.create_from_dict(d)
+        tb = ImageBlock.create_from_dict(d)
         self.assertEqual(tb.image, 'foo/bar/blah.jpg')
         self.assertEqual(tb.caption, '')
 
     def test_edit_form(self):
-        tb = SimpleImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
+        tb = ImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
         f = tb.edit_form()
         self.assertTrue('caption' in f.fields)
-        self.assertFalse(f.fields['caption'].required)
-        self.assertFalse(f.fields['alt'].required)
 
     def test_edit(self):
-        tb = SimpleImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
+        tb = ImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
         tb.edit(dict(image='foo/bar/blah.jpg', caption='bar'), [])
         self.assertEqual(tb.caption, 'bar')
 
     def test_as_dict(self):
-        tb = SimpleImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
+        tb = ImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
         self.assertEqual(
             tb.as_dict(),
             dict(image='foo/bar/blah.jpg',
-                 alt='',
-                 caption=''))
+                 alt='', caption='', lightbox=False))
+
+    def test_list_resources(self):
+        tb = ImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
+        self.assertEqual(tb.list_resources(), ['foo/bar/blah.jpg'])
+
+
+class ImagePullQuoteBlockTest(TestCase):
+    def test_add_form(self):
+        f = ImagePullQuoteBlock.add_form()
+        self.assertTrue('image' in f.fields)
+        self.assertTrue('caption' in f.fields)
+        self.assertTrue('alt' in f.fields)
+
+    def test_create_from_dict(self):
+        d = dict(image='foo/bar/blah.jpg')
+        tb = ImagePullQuoteBlock.create_from_dict(d)
+        self.assertEqual(tb.image, 'foo/bar/blah.jpg')
+        self.assertEqual(tb.caption, '')
+
+    def test_edit_form(self):
+        tb = ImagePullQuoteBlock.create_from_dict(
+            dict(image='foo/bar/blah.jpg'))
+        f = tb.edit_form()
+        self.assertTrue('caption' in f.fields)
+
+    def test_edit(self):
+        tb = ImagePullQuoteBlock.create_from_dict(
+            dict(image='foo/bar/blah.jpg'))
+        tb.edit(dict(image='foo/bar/blah.jpg', caption='bar'), [])
+        self.assertEqual(tb.caption, 'bar')
+
+    def test_as_dict(self):
+        tb = ImagePullQuoteBlock.create_from_dict(
+            dict(image='foo/bar/blah.jpg'))
+        self.assertEqual(
+            tb.as_dict(),
+            dict(image='foo/bar/blah.jpg',
+                 alt='', caption=''))
+
+    def test_list_resources(self):
+        tb = ImagePullQuoteBlock.create_from_dict(
+            dict(image='foo/bar/blah.jpg'))
+        self.assertEqual(tb.list_resources(), ['foo/bar/blah.jpg'])
 
 
 class HTMLBlockWYSIWYGTest (TestCase):
-    def test_is_valid_from_factory(self):
-        b = HTMLBlockWYSIWYGFactory()
-        b.full_clean()
-
     def test_add_form(self):
         f = HTMLBlockWYSIWYG.add_form()
         self.assertTrue('wysiwyg_html' in f.fields)

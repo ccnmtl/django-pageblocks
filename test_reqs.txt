@@ -1,22 +1,11 @@
-django-treebeard==4.5.1
-Markdown==3.3.6
-django-markwhat==1.6.2
-django-pagetree==1.4.3
-django-jenkins==0.110.0
-importlib-metadata<4.12  # for flake8
-typing_extensions==4.1.1
-zipp==3.6.0  # for flake8
-flake8==4.0.1
-coverage==6.2
+Django==1.11.24
+Markdown==2.1.1
+pagetree==0.7.1
+nose==1.3.7
+coverage==3.6
+django_nose==1.4.6
+pyflakes==2.1.1
 pep8==1.7.1
-pyflakes==2.4.0
-Pillow==8.4.0
-Faker==13.3.4
-factory_boy==3.2.1
-functools32==3.2.3-2; python_version < '3'
-entrypoints==0.4
-pycodestyle==2.8.0
-mccabe==0.7.0
-python-dateutil==2.8.2
-text-unidecode==1.3
-six==1.16.0
+flake8==3.7.8
+Pillow==5.4.1
+test_reqs/sorl-3.2ctl-py2.py3-none-any.whl
