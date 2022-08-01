@@ -15,7 +15,7 @@ Faker==13.15.0
 factory_boy==3.2.1
 functools32==3.2.3-2; python_version < '3'
 entrypoints==0.4
-pycodestyle==2.8.0
+pycodestyle==2.9.0
 mccabe==0.7.0
 python-dateutil==2.8.2
 text-unidecode==1.3
