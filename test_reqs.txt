@@ -5,7 +5,7 @@ django-pagetree==1.4.3
 django-jenkins==0.110.0
 importlib-metadata<5.2  # for flake8
 typing_extensions==4.4.0
-zipp==3.10.0  # for flake8
+zipp==3.11.0  # for flake8
 flake8==6.0.0
 coverage==6.5.0
 pep8==1.7.1
