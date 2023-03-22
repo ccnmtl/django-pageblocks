@@ -11,7 +11,7 @@ coverage==7.2.2
 pep8==1.7.1
 pyflakes==3.0.1
 Pillow==9.4.0
-Faker==18.2.0
+Faker==18.3.0
 factory_boy==3.2.1
 functools32==3.2.3-2; python_version < '3'
 entrypoints==0.4
