@@ -12,7 +12,7 @@ pep8==1.7.1
 pyflakes==3.0.1
 Pillow==10.0.0
 Faker==19.2.0
-factory_boy==3.2.1
+factory_boy==3.3.0
 functools32==3.2.3-2; python_version < '3'
 entrypoints==0.4
 pycodestyle==2.10.0
