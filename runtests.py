@@ -22,13 +22,9 @@ def main():
             'django.contrib.sessions',
             'pagetree',
             'pageblocks',
-            'django_jenkins',
         ),
         TEST_RUNNER='django.test.runner.DiscoverRunner',
 
-        JENKINS_TASKS=(
-            'django_jenkins.tasks.with_coverage',
-        ),
         PROJECT_APPS=[
             'pageblocks',
         ],

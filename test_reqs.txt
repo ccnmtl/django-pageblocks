@@ -2,7 +2,6 @@ django-treebeard==4.7
 Markdown==3.4.4
 django-markwhat==1.6.2
 django-pagetree==1.4.3
-django-jenkins==0.110.0
 importlib-metadata<6.9  # for flake8
 typing_extensions==4.7.1
 zipp==3.16.2  # for flake8
@@ -13,7 +12,6 @@ pyflakes==3.1.0
 Pillow==10.0.0
 Faker==19.3.1
 factory_boy==3.3.0
-functools32==3.2.3-2; python_version < '3'
 entrypoints==0.4
 pycodestyle==2.11.0
 mccabe==0.7.0
