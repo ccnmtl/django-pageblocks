@@ -6,7 +6,7 @@ importlib-metadata<6.9  # for flake8
 typing_extensions==4.7.1
 zipp==3.16.2  # for flake8
 flake8==6.1.0
-coverage==7.3.0
+coverage==7.3.1
 pep8==1.7.1
 pyflakes==3.1.0
 Pillow==10.0.0
