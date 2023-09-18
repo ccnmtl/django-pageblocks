@@ -3,7 +3,7 @@ Markdown==3.4.4
 django-markwhat==1.6.2
 django-pagetree==1.4.3
 importlib-metadata<6.9  # for flake8
-typing_extensions==4.7.1
+typing_extensions==4.8.0
 zipp==3.16.2  # for flake8
 flake8==6.1.0
 coverage==7.3.1
