@@ -10,7 +10,7 @@ coverage==7.3.2
 pep8==1.7.1
 pyflakes==3.1.0
 Pillow==10.0.1
-Faker==19.9.0
+Faker==19.10.0
 factory_boy==3.3.0
 entrypoints==0.4
 pycodestyle==2.11.0
