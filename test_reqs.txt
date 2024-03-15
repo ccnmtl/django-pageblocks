@@ -1,5 +1,5 @@
 django-treebeard==4.7.1
-Markdown==3.5.2
+Markdown==3.6
 django-markwhat==1.6.2
 django-pagetree==1.5.0
 importlib-metadata<7.1  # for flake8
