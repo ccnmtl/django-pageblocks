@@ -3,14 +3,13 @@ from pagetree.models import PageBlock
 from django.conf import settings
 from sorl.thumbnail.fields import ImageWithThumbnailsField
 from django.contrib.contenttypes.fields import GenericRelation
-from django.utils.encoding import python_2_unicode_compatible, smart_text
+from django.utils.encoding import smart_str
 from django import forms
 import os
 from django.template.defaultfilters import slugify
 from datetime import datetime
 
 
-@python_2_unicode_compatible
 class TextBlock(models.Model):
     pageblocks = GenericRelation(PageBlock)
     body = models.TextField(blank=True)
@@ -19,7 +18,7 @@ class TextBlock(models.Model):
     display_name = "Text Block"
 
     def __str__(self):
-        return smart_text(self.pageblock())
+        return smart_str(self.pageblock())
 
     def pageblock(self):
         return self.pageblocks.all()[0]
@@ -59,7 +58,6 @@ class TextBlock(models.Model):
             return self.body[:61] + "..."
 
 
-@python_2_unicode_compatible
 class HTMLBlock(models.Model):
     pageblocks = GenericRelation(PageBlock)
     html = models.TextField(blank=True)
@@ -71,7 +69,7 @@ class HTMLBlock(models.Model):
         return self.pageblocks.all()[0]
 
     def __str__(self):
-        return smart_text(self.pageblock())
+        return smart_str(self.pageblock())
 
     def edit_form(self):
         class EditForm(forms.Form):
@@ -107,7 +105,6 @@ class HTMLBlock(models.Model):
             return self.html[:61].replace("<", "&lt;") + "..."
 
 
-@python_2_unicode_compatible
 class PullQuoteBlock(models.Model):
     pageblocks = GenericRelation(PageBlock)
     body = models.TextField(blank=True)
@@ -118,7 +115,7 @@ class PullQuoteBlock(models.Model):
         return self.pageblocks.all()[0]
 
     def __str__(self):
-        return smart_text(self.pageblock())
+        return smart_str(self.pageblock())
 
     def edit_form(self):
         class EditForm(forms.Form):
@@ -154,7 +151,6 @@ class PullQuoteBlock(models.Model):
             return self.body[:61] + "..."
 
 
-@python_2_unicode_compatible
 class ImageBlock(models.Model):
     pageblocks = GenericRelation(PageBlock)
     image = ImageWithThumbnailsField(
@@ -179,7 +175,7 @@ class ImageBlock(models.Model):
         return self.pageblocks.all()[0]
 
     def __str__(self):
-        return smart_text(self.pageblock())
+        return smart_str(self.pageblock())
 
     def edit_form(self):
         class EditForm(forms.Form):
@@ -260,7 +256,6 @@ class ImageBlock(models.Model):
         return [self.image.url]
 
 
-@python_2_unicode_compatible
 class ImagePullQuoteBlock(models.Model):
     pageblocks = GenericRelation(PageBlock)
     image = ImageWithThumbnailsField(
@@ -285,7 +280,7 @@ class ImagePullQuoteBlock(models.Model):
         return self.pageblocks.all()[0]
 
     def __str__(self):
-        return smart_text(self.pageblock())
+        return smart_str(self.pageblock())
 
     def edit_form(self):
         class EditForm(forms.Form):
@@ -373,7 +368,6 @@ class ImagePullQuoteBlock(models.Model):
 # ./manage.py syncdb
 # Define custom styles in a file called tiny_mce.css
 # in your media/css directory
-@python_2_unicode_compatible
 class HTMLBlockWYSIWYG(models.Model):
     pageblocks = GenericRelation(PageBlock)
     wysiwyg_html = models.TextField(blank=True)
@@ -385,7 +379,7 @@ class HTMLBlockWYSIWYG(models.Model):
         return self.pageblocks.all()[0]
 
     def __str__(self):
-        return smart_text(self.pageblock())
+        return smart_str(self.pageblock())
 
     @classmethod
     def add_form(self):
