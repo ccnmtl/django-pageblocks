@@ -11,7 +11,7 @@ pep8==1.7.1
 pyflakes==3.2.0
 
 Pillow==10.3.0
-Faker==25.2.0
+Faker==25.3.0
 factory_boy==3.3.0
 entrypoints==0.4
 pycodestyle==2.11.1
