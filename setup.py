@@ -27,7 +27,7 @@ from setuptools import setup
 
 setup(
     name="django-pageblocks",
-    version="2.0.0",
+    version="1.3.0",
     author="Anders Pearson",
     author_email="ctl-dev@columbia.edu",
     url="https://github.com/ccnmtl/django-pageblocks",
@@ -35,6 +35,7 @@ setup(
     long_description="generic pageblocks",
     install_requires = [
         "django-pagetree>=1.1.0",
+        "sorl>=3.1",
     ],
     scripts = [],
     license = "BSD",
