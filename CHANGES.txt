@@ -1,9 +1,12 @@
-2.0.0 (2017-08-28)
+1.3.0
 ==================
-* Removed ImageBlock and ImagePullQuoteBlock. To use these models,
-  you can find them in the django-sorlimageblock package.
-* Removed dependency on our outdated `sorl` package, which isn't present
-  on pypi.python.org.
+* Added Django 4.2 compatibility
+
+1.2.0 (2017-08-10)
+==================
+* Incorporated all commits up to head, except for the removal
+  of the ImageBlock
+* Adds ImageBlock test for the lightbox "on" value
 
 1.1.0 (2016-08-12)
 ==================
