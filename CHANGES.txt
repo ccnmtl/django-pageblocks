@@ -1,6 +1,7 @@
-1.3.0
+1.3.0 (2024-06-12)
 ==================
 * Added Django 4.2 compatibility
+* Migrated from django-markwhat to django-markdownify
 
 1.2.0 (2017-08-10)
 ==================
