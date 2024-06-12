@@ -1,4 +1,4 @@
-# Copyright (c) 2007-2015, Columbia Center For New Media Teaching And Learning (CCNMTL)
+# Copyright (c) 2007-2024, Columbia Center For Teaching And Learning (CTL)
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -36,6 +36,7 @@ setup(
     install_requires = [
         "django-pagetree>=1.1.0",
         "sorl>=3.1",
+        "django-markdownify",
     ],
     scripts = [],
     license = "BSD",
@@ -43,5 +44,4 @@ setup(
     zip_safe=False,
     packages=['pageblocks'],
     include_package_data=True,
-
-    )
+)
