@@ -1,4 +1,4 @@
-{% load markup %}
+{% load markdownify %}
 {% load thumbnail %}
 
 {% if block.lightbox %}
@@ -17,7 +17,7 @@
 			<div class="modal-body">
 				<img alt="{{block.alt}}" src="{% if img_src %}{{img_src}}{% else %}{% thumbnail block.image 900x900 %}{% endif %}" />
 				<div class="caption">
-					{{block.caption|markdown}}
+					{{block.caption|markdownify}}
 				</div>
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 						 src="{% if img_src %}{{img_src}}{% else %}{% thumbnail block.image 200x200 %}{% endif %}" />
 			</a>
 			<div class="caption">
-				{{block.caption|markdown}}
+				{{block.caption|markdownify}}
 			</div>
 		</div>
 	</li>
@@ -41,6 +41,6 @@
 {% else %}
 <img alt="{{block.alt}}" src="{% if img_src %}{{img_src}}{% else %}{% thumbnail block.image 600x600 %}{% endif %}" />
 <div class="caption">
-{{block.caption|markdown}}
+{{block.caption|markdownify}}
 </div>
 {% endif %}
