@@ -138,7 +138,7 @@ class ImageBlockTest(TestCase):
 
     def test_list_resources(self):
         tb = ImageBlock.create_from_dict(dict(image='foo/bar/blah.jpg'))
-        self.assertEqual(tb.list_resources(), ['foo/bar/blah.jpg'])
+        self.assertEqual(tb.list_resources(), ['/foo/bar/blah.jpg'])
 
 
 class ImagePullQuoteBlockTest(TestCase):
@@ -177,7 +177,7 @@ class ImagePullQuoteBlockTest(TestCase):
     def test_list_resources(self):
         tb = ImagePullQuoteBlock.create_from_dict(
             dict(image='foo/bar/blah.jpg'))
-        self.assertEqual(tb.list_resources(), ['foo/bar/blah.jpg'])
+        self.assertEqual(tb.list_resources(), ['/foo/bar/blah.jpg'])
 
 
 class HTMLBlockWYSIWYGTest (TestCase):

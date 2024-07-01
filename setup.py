@@ -27,20 +27,17 @@ from setuptools import setup
 
 setup(
     name="django-pageblocks",
-    version="0.5.18",
+    version="0.5.19",
     author="Anders Pearson",
     author_email="ctl-dev@columbia.edu",
     url="https://github.com/ccnmtl/django-pageblocks",
     description="Basic Pageblocks to go along with django-pagetree",
     long_description="generic pageblocks",
-    install_requires = [],
-    scripts = [],
-    license = "BSD",
-    platforms = ["any"],
+    install_requires=[],
+    scripts=[],
+    license="BSD",
+    platforms=["any"],
     zip_safe=False,
-#    package_data = {'' : ['*.*']},
     packages=['pageblocks'],
-    test_suite='nose.collector',
     include_package_data=True,
-
-    )
+)
