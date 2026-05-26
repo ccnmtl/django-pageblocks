@@ -1,4 +1,4 @@
-# Copyright (c) 2007-2024, Columbia Center For Teaching And Learning (CTL)
+# Copyright (c) 2007-2026, Columbia Center For Teaching And Learning (CTL)
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -27,7 +27,7 @@ from setuptools import setup
 
 setup(
     name="django-pageblocks",
-    version="1.3.0",
+    version="1.3.1",
     author="Anders Pearson",
     author_email="ctl-dev@columbia.edu",
     url="https://github.com/ccnmtl/django-pageblocks",
